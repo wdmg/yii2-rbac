@@ -9,7 +9,7 @@ RBAC management module for Yii2
 # Installation
 To install the module, run the following command in the console:
 
-`$ composer require "wdmg/yii2-rbac"`
+`$ composer require "wdmg/yii2-rbac:dev-master"`
 
 After configure db connection, run the following command in the console:
 
