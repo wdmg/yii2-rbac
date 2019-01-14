@@ -28,6 +28,14 @@ In any case, you can execute the migration and create the initial data, run the 
 
 To add a module to the project, add the following data in your configuration file:
 
+    'components' => [
+        ...
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            ...
+        ],
+        ...
+    ],
     'modules' => [
         ...
         'tickets' => [
@@ -42,6 +50,8 @@ and Bootstrap section:
 `
 $config['bootstrap'][] = 'wdmg\rbac\Bootstrap';
 `
+
+[Notice] You should configure "authManager" component in config to use database before executing migrations.
 
 # Routing
 `http://example.com/admin/rbac` - Module dashboard
