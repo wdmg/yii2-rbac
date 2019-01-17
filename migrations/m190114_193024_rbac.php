@@ -70,8 +70,8 @@ class m190114_193024_rbac extends Migration
         $this->createTable($authManager->ruleTable, [
             'name' => $this->string(64)->notNull(),
             'data' => $this->binary(),
-            'created_at' => $this->integer(),
-            'updated_at' => $this->integer(),
+            'created_at' => $this->dateTime()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
+            'updated_at' => $this->dateTime()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
             'PRIMARY KEY ([[name]])',
         ], $tableOptions);
 
@@ -81,31 +81,78 @@ class m190114_193024_rbac extends Migration
             'description' => $this->text(),
             'rule_name' => $this->string(64),
             'data' => $this->binary(),
-            'created_at' => $this->integer(),
-            'updated_at' => $this->integer(),
+            'created_at' => $this->dateTime()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
+            'updated_at' => $this->dateTime()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
             'PRIMARY KEY ([[name]])',
-            'FOREIGN KEY ([[rule_name]]) REFERENCES ' . $authManager->ruleTable . ' ([[name]])' .
-            $this->buildFkClause('ON DELETE SET NULL', 'ON UPDATE CASCADE'),
         ], $tableOptions);
+
+        $this->addForeignKey(
+            'fk_auth_item_to_rules_1',
+            $authManager->itemTable,
+            'rule_name',
+            $authManager->ruleTable,
+            'name',
+            'SET NULL',
+            'CASCADE'
+        );
 
         $this->createTable($authManager->itemChildTable, [
             'parent' => $this->string(64)->notNull(),
             'child' => $this->string(64)->notNull(),
             'PRIMARY KEY ([[parent]], [[child]])',
-            'FOREIGN KEY ([[parent]]) REFERENCES ' . $authManager->itemTable . ' ([[name]])' .
-            $this->buildFkClause('ON DELETE CASCADE', 'ON UPDATE CASCADE'),
-            'FOREIGN KEY ([[child]]) REFERENCES ' . $authManager->itemTable . ' ([[name]])' .
-            $this->buildFkClause('ON DELETE CASCADE', 'ON UPDATE CASCADE'),
         ], $tableOptions);
+
+        $this->addForeignKey(
+            'fk_auth_item_child_to_items_1',
+            $authManager->itemChildTable,
+            'parent',
+            $authManager->itemTable,
+            'name',
+            'CASCADE',
+            'CASCADE'
+        );
+        $this->addForeignKey(
+            'fk_auth_item_child_to_items_2',
+            $authManager->itemChildTable,
+            'child',
+            $authManager->itemTable,
+            'name',
+            'CASCADE',
+            'CASCADE'
+        );
 
         $this->createTable($authManager->assignmentTable, [
             'item_name' => $this->string(64)->notNull(),
-            'user_id' => $this->string(64)->notNull(),
-            'created_at' => $this->integer(),
+            'user_id' => $this->integer(11)->notNull(),
+            'created_at' => $this->dateTime()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
             'PRIMARY KEY ([[item_name]], [[user_id]])',
-            'FOREIGN KEY ([[item_name]]) REFERENCES ' . $authManager->itemTable . ' ([[name]])' .
-            $this->buildFkClause('ON DELETE CASCADE', 'ON UPDATE CASCADE'),
         ], $tableOptions);
+
+        $this->addForeignKey(
+            'fk_auth_assignment_to_items_1',
+            $authManager->assignmentTable,
+            'item_name',
+            $authManager->itemTable,
+            'name',
+            'CASCADE',
+            'CASCADE'
+        );
+
+        // If exist module `Users` set foreign key `user_id` to `users.id`
+        if(class_exists('\wdmg\users\models\Users') && isset(Yii::$app->modules['users'])) {
+
+            $userTable = \wdmg\users\models\Users::tableName();
+            $this->addForeignKey(
+                'fk_auth_assignment_to_users_1',
+                $authManager->assignmentTable,
+                'user_id',
+                $userTable,
+                'id',
+                'CASCADE',
+                'CASCADE'
+            );
+
+        }
 
         if ($this->isMSSQL()) {
             $this->execute("CREATE TRIGGER {$schema}.trigger_auth_item_child
