@@ -37,8 +37,22 @@ class Module extends \yii\base\Module
             $this->controllerNamespace = 'wdmg\rbac\commands';
         }
 
+        // Register auth manager tables
+        $this->registerAuthManager();
+
         // Register translations
         $this->registerTranslations();
+
+    }
+
+    // Registers auth manager for app
+    public function registerAuthManager()
+    {
+        $authManager = Yii::$app->getAuthManager();
+        $authManager->assignmentTable = '{{%rbac_assignments}}';
+        $authManager->itemChildTable = '{{%rbac_item_childs}}';
+        $authManager->itemTable = '{{%rbac_items}}';
+        $authManager->ruleTable = '{{%rbac_rules}}';
     }
 
     // Registers translations for the module
