@@ -30,7 +30,7 @@ class RbacItems extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'rbac_items';
+        return '{{rbac_items}}';
     }
 
     /**

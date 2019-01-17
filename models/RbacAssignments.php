@@ -21,7 +21,7 @@ class RbacAssignments extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'rbac_assignments';
+        return '{{rbac_assignments}}';
     }
 
     /**

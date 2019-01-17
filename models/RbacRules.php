@@ -21,7 +21,7 @@ class RbacRules extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'rbac_rules';
+        return '{{rbac_rules}}';
     }
 
     /**

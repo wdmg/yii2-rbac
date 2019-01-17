@@ -50,7 +50,7 @@ class Module extends \yii\base\Module
     {
         $authManager = Yii::$app->getAuthManager();
         $authManager->assignmentTable = '{{%rbac_assignments}}';
-        $authManager->itemChildTable = '{{%rbac_item_childs}}';
+        $authManager->itemChildTable = '{{%rbac_childs}}';
         $authManager->itemTable = '{{%rbac_items}}';
         $authManager->ruleTable = '{{%rbac_rules}}';
     }
