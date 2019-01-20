@@ -51,8 +51,9 @@ class Module extends \yii\base\Module
             $this->controllerNamespace = 'wdmg\rbac\commands';
 
         // Set default user identity class
-        if ($this->userClass === null)
+        /*if ($this->userClass === null)
             $this->userClass = Yii::$app->getUser()->identityClass;
+        */
 
         // Register auth manager tables
         $this->registerAuthManager();
