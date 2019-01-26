@@ -40,6 +40,11 @@ class Module extends \yii\base\Module
     public $vendor = "wdmg";
 
     /**
+     * @var array of strings missing translations
+     */
+    public $missingTranslation;
+
+    /**
      * {@inheritdoc}
      */
     public function init()
@@ -63,6 +68,21 @@ class Module extends \yii\base\Module
 
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function afterAction($action, $result)
+    {
+
+        // Log to debuf console missing translations
+        if (is_array($this->missingTranslation) && YII_ENV == 'dev')
+            Yii::warning('Missing translations: ' . var_export($this->missingTranslation, true), 'i18n');
+
+        $result = parent::afterAction($action, $result);
+        return $result;
+
+    }
+
     // Registers auth manager for app
     public function registerAuthManager()
     {
@@ -80,6 +100,12 @@ class Module extends \yii\base\Module
             'class' => 'yii\i18n\PhpMessageSource',
             'sourceLanguage' => 'en',
             'basePath' => '@vendor/wdmg/yii2-rbac/messages',
+            'on missingTranslation' => function($event) {
+
+                if (YII_ENV == 'dev')
+                    $this->missingTranslation[] = $event->message;
+
+            },
         ];
     }
 
