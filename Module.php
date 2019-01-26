@@ -40,6 +40,11 @@ class Module extends \yii\base\Module
     public $vendor = "wdmg";
 
     /**
+     * @var string the module version
+     */
+    public $version = "1.0.0";
+
+    /**
      * @var array of strings missing translations
      */
     public $missingTranslation;
@@ -54,6 +59,9 @@ class Module extends \yii\base\Module
         // Set controller namespace for console commands
         if (Yii::$app instanceof \yii\console\Application)
             $this->controllerNamespace = 'wdmg\rbac\commands';
+
+        // Set current version of module
+        $this->setVersion($this->version);
 
         // Set default user identity class
         /*if ($this->userClass === null)
@@ -87,10 +95,12 @@ class Module extends \yii\base\Module
     public function registerAuthManager()
     {
         $authManager = Yii::$app->getAuthManager();
-        $authManager->assignmentTable = $this->assignmentTable;
-        $authManager->itemChildTable = $this->itemChildTable;
-        $authManager->itemTable = $this->itemTable;
-        $authManager->ruleTable = $this->ruleTable;
+        if ($authManager) {
+            $authManager->assignmentTable = $this->assignmentTable;
+            $authManager->itemChildTable = $this->itemChildTable;
+            $authManager->itemTable = $this->itemTable;
+            $authManager->ruleTable = $this->ruleTable;
+        }
     }
 
     // Registers translations for the module
