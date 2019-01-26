@@ -7,18 +7,17 @@ use yii\widgets\Pjax;
 /* @var $searchModel wdmg\rbac\models\RbacRulesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app/modules/rbac', 'Rbac Rules');
+$this->title = Yii::t('app/modules/rbac', 'Access rules');
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
+<div class="page-header">
+    <h1><?= Html::encode($this->title) ?> <small class="text-muted pull-right">[v.<?= $this->context->module->version ?>]</small></h1>
+</div>
 <div class="rbac-rules-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a(Yii::t('app/modules/rbac', 'Create Rbac Rules'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -27,12 +26,23 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'name',
-            'data',
             'created_at',
             'updated_at',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'header' => Yii::t('app/modules/rbac', 'Actions'),
+                'contentOptions' => [
+                    'class' => 'text-center'
+                ]
+            ],
         ],
     ]); ?>
     <?php Pjax::end(); ?>
+
+    <div>
+        <?= Html::a(Yii::t('app/modules/rbac', 'Add new rule'), ['rules/create'], ['class' => 'btn btn-success pull-right']) ?>
+    </div>
 </div>
+
+<?php echo $this->render('../_debug'); ?>
