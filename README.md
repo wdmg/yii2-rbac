@@ -58,7 +58,7 @@ $config['bootstrap'][] = 'wdmg\rbac\Bootstrap';
 
 # Routing
 - `/admin/rbac` - Role and permission
-- `/admin/rbac/items/` - Role and permission, alias of `/admin/rbac/items/`
+- `/admin/rbac/items/` - Role and permission, alias of `/admin/rbac/`
 - `/admin/rbac/childs/` - Role/permission inheritance from each other
 - `/admin/rbac/assignments/` - Data about the assignment of role/permission to users
 - `/admin/rbac/rules/` - Store individual rules
