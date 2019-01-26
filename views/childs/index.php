@@ -4,16 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel wdmg\rbac\models\RbacItemChildsSearch */
+/* @var $searchModel wdmg\rbac\models\RbacChildsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app/modules/rbac', 'Childs of roles and permissions');
+$this->title = Yii::t('app/modules/rbac', 'Inheritance permissions and roles');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <div class="page-header">
     <h1><?= Html::encode($this->title) ?> <small class="text-muted pull-right">[v.<?= $this->context->module->version ?>]</small></h1>
 </div>
+<p>
+    <?= Yii::t('app/modules/rbac', 'Here you can specify which roles and rights are inherited. The nesting level of inherited rights is not limited.') ?>
+</p>
 <div class="rbac-item-childs-index">
 
     <?php Pjax::begin(); ?>

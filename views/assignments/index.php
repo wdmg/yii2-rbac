@@ -14,6 +14,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="page-header">
     <h1><?= Html::encode($this->title) ?> <small class="text-muted pull-right">[v.<?= $this->context->module->version ?>]</small></h1>
 </div>
+<p>
+    <?= Yii::t('app/modules/rbac', 'Here you can assign access roles to specific users.') ?>
+</p>
 <div class="rbac-assignments-index">
 
     <?php Pjax::begin(); ?>

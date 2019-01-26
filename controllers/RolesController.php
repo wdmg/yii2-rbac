@@ -3,17 +3,17 @@
 namespace wdmg\rbac\controllers;
 
 use Yii;
-use wdmg\rbac\models\RbacItems;
-use wdmg\rbac\models\RbacItemsSearch;
+use wdmg\rbac\models\RbacRoles;
+use wdmg\rbac\models\RbacRolesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 /**
- * ItemsController implements the CRUD actions for RbacItems model.
+ * RolesController implements the CRUD actions for RbacItems model.
  */
-class ItemsController extends Controller
+class RolesController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -46,7 +46,7 @@ class ItemsController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new RbacItemsSearch();
+        $searchModel = new RbacRolesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -75,7 +75,7 @@ class ItemsController extends Controller
      */
     public function actionCreate()
     {
-        $model = new RbacItems();
+        $model = new RbacRoles();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->name]);
@@ -124,12 +124,12 @@ class ItemsController extends Controller
      * Finds the RbacItems model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
-     * @return RbacItems the loaded model
+     * @return RbacRoles the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = RbacItems::findOne($id)) !== null) {
+        if (($model = RbacRoles::findOne($id)) !== null) {
             return $model;
         }
 

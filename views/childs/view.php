@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model wdmg\rbac\models\RbacItemChilds */
+/* @var $model wdmg\rbac\models\RbacChilds */
 
 $this->title = $model->parent;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/rbac', 'Rbac Item Childs'), 'url' => ['index']];

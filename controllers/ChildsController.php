@@ -3,8 +3,8 @@
 namespace wdmg\rbac\controllers;
 
 use Yii;
-use wdmg\rbac\models\RbacItemChilds;
-use wdmg\rbac\models\RbacItemChildsSearch;
+use wdmg\rbac\models\RbacChilds;
+use wdmg\rbac\models\RbacChildsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -46,7 +46,7 @@ class ChildsController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new RbacItemChildsSearch();
+        $searchModel = new RbacChildsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -76,7 +76,7 @@ class ChildsController extends Controller
      */
     public function actionCreate()
     {
-        $model = new RbacItemChilds();
+        $model = new RbacChilds();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'parent' => $model->parent, 'child' => $model->child]);
@@ -128,12 +128,12 @@ class ChildsController extends Controller
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $parent
      * @param string $child
-     * @return RbacItemChilds the loaded model
+     * @return RbacChilds the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($parent, $child)
     {
-        if (($model = RbacItemChilds::findOne(['parent' => $parent, 'child' => $child])) !== null) {
+        if (($model = RbacChilds::findOne(['parent' => $parent, 'child' => $child])) !== null) {
             return $model;
         }
 

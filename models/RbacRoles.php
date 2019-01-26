@@ -6,7 +6,7 @@ use Yii;
 use \yii\behaviors\TimeStampBehavior;
 
 /**
- * This is the model class for table "rbac_items".
+ * This is the model class for table "rbac_roles".
  *
  * @property string $name
  * @property int $type
@@ -18,20 +18,20 @@ use \yii\behaviors\TimeStampBehavior;
  *
  * @property RbacAssignments[] $rbacAssignments
  * @property Users[] $users
- * @property RbacItemChilds[] $rbacItemChilds
- * @property RbacItemChilds[] $rbacItemChilds0
- * @property RbacItems[] $children
- * @property RbacItems[] $parents
+ * @property RbacChilds[] $rbacItemChilds
+ * @property RbacChilds[] $rbacItemChilds0
+ * @property RbacRoles[] $children
+ * @property RbacRoles[] $parents
  * @property RbacRules $ruleName
  */
-class RbacItems extends \yii\db\ActiveRecord
+class RbacRoles extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return '{{rbac_items}}';
+        return '{{rbac_roles}}';
     }
 
     /**
@@ -106,7 +106,7 @@ class RbacItems extends \yii\db\ActiveRecord
      */
     public function getRbacItemChilds()
     {
-        return $this->hasMany(RbacItemChilds::className(), ['parent' => 'name']);
+        return $this->hasMany(RbacChilds::className(), ['parent' => 'name']);
     }
 
     /**
@@ -114,7 +114,7 @@ class RbacItems extends \yii\db\ActiveRecord
      */
     public function getRbacItemChilds0()
     {
-        return $this->hasMany(RbacItemChilds::className(), ['child' => 'name']);
+        return $this->hasMany(RbacChilds::className(), ['child' => 'name']);
     }
 
     /**
@@ -122,7 +122,7 @@ class RbacItems extends \yii\db\ActiveRecord
      */
     public function getChildren()
     {
-        return $this->hasMany(RbacItems::className(), ['name' => 'child'])->viaTable('rbac_item_childs', ['parent' => 'name']);
+        return $this->hasMany(RbacRoles::className(), ['name' => 'child'])->viaTable('rbac_item_childs', ['parent' => 'name']);
     }
 
     /**
@@ -130,7 +130,7 @@ class RbacItems extends \yii\db\ActiveRecord
      */
     public function getParents()
     {
-        return $this->hasMany(RbacItems::className(), ['name' => 'parent'])->viaTable('rbac_item_childs', ['child' => 'name']);
+        return $this->hasMany(RbacRoles::className(), ['name' => 'parent'])->viaTable('rbac_item_childs', ['child' => 'name']);
     }
 
     /**

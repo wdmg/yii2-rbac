@@ -10,10 +10,10 @@ use Yii;
  * @property string $parent
  * @property string $child
  *
- * @property RbacItems $parent0
- * @property RbacItems $child0
+ * @property RbacRoles $parent0
+ * @property RbacRoles $child0
  */
-class RbacItemChilds extends \yii\db\ActiveRecord
+class RbacChilds extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -32,8 +32,8 @@ class RbacItemChilds extends \yii\db\ActiveRecord
             [['parent', 'child'], 'required'],
             [['parent', 'child'], 'string', 'max' => 64],
             [['parent', 'child'], 'unique', 'targetAttribute' => ['parent', 'child']],
-            [['parent'], 'exist', 'skipOnError' => true, 'targetClass' => RbacItems::className(), 'targetAttribute' => ['parent' => 'name']],
-            [['child'], 'exist', 'skipOnError' => true, 'targetClass' => RbacItems::className(), 'targetAttribute' => ['child' => 'name']],
+            [['parent'], 'exist', 'skipOnError' => true, 'targetClass' => RbacRoles::className(), 'targetAttribute' => ['parent' => 'name']],
+            [['child'], 'exist', 'skipOnError' => true, 'targetClass' => RbacRoles::className(), 'targetAttribute' => ['child' => 'name']],
         ];
     }
 
@@ -53,7 +53,7 @@ class RbacItemChilds extends \yii\db\ActiveRecord
      */
     public function getParent0()
     {
-        return $this->hasOne(RbacItems::className(), ['name' => 'parent']);
+        return $this->hasOne(RbacRoles::className(), ['name' => 'parent']);
     }
 
     /**
@@ -61,6 +61,6 @@ class RbacItemChilds extends \yii\db\ActiveRecord
      */
     public function getChild0()
     {
-        return $this->hasOne(RbacItems::className(), ['name' => 'child']);
+        return $this->hasOne(RbacRoles::className(), ['name' => 'child']);
     }
 }

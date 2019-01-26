@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model wdmg\rbac\models\RbacItems */
+/* @var $model wdmg\rbac\models\RbacRoles */
 
 $this->title = Yii::t('app/modules/rbac', 'Update Rbac Items: {name}', [
     'name' => $model->name,

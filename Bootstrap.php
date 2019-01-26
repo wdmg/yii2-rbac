@@ -20,8 +20,8 @@ class Bootstrap implements BootstrapInterface
         $app->getUrlManager()->addRules(
             [
                 $prefix . '<module:rbac>/' => '<module>/items/index',
-                $prefix . '<module:rbac>/<controller:(items|childs|assignments|rules)>/' => '<module>/<controller>',
-                $prefix . '<module:rbac>/<controller:(items|childs|assignments|rules)>/<action:\w+>' => '<module>/<controller>/<action>',
+                $prefix . '<module:rbac>/<controller:(roles|childs|assignments|rules)>/' => '<module>/<controller>',
+                $prefix . '<module:rbac>/<controller:(roles|childs|assignments|rules)>/<action:\w+>' => '<module>/<controller>/<action>',
             ],
             true
         );

@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel wdmg\rbac\models\RbacItemsSearch */
+/* @var $searchModel wdmg\rbac\models\RbacRolesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = Yii::t('app/modules/rbac', 'Roles and permissions');
@@ -14,6 +14,9 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="page-header">
     <h1><?= Html::encode($this->title) ?> <small class="text-muted pull-right">[v.<?= $this->context->module->version ?>]</small></h1>
 </div>
+<p>
+    <?= Yii::t('app/modules/rbac', 'Here you can add access roles and permissions, as well as attach access rules to them.') ?>
+</p>
 <div class="rbac-items-index">
 
     <?php Pjax::begin(); ?>

@@ -4,12 +4,12 @@ namespace wdmg\rbac\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use wdmg\rbac\models\RbacItems;
+use wdmg\rbac\models\RbacRoles;
 
 /**
  * RbacItemsSearch represents the model behind the search form of `wdmg\rbac\models\RbacItems`.
  */
-class RbacItemsSearch extends RbacItems
+class RbacRolesSearch extends RbacRoles
 {
     /**
      * {@inheritdoc}
@@ -40,7 +40,7 @@ class RbacItemsSearch extends RbacItems
      */
     public function search($params)
     {
-        $query = RbacItems::find();
+        $query = RbacRoles::find();
 
         // add conditions that should always apply here
 

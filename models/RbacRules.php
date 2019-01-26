@@ -13,7 +13,7 @@ use \yii\behaviors\TimeStampBehavior;
  * @property string $created_at
  * @property string $updated_at
  *
- * @property RbacItems[] $rbacItems
+ * @property RbacRoles[] $rbacItems
  */
 class RbacRules extends \yii\db\ActiveRecord
 {
@@ -76,6 +76,6 @@ class RbacRules extends \yii\db\ActiveRecord
      */
     public function getRbacItems()
     {
-        return $this->hasMany(RbacItems::className(), ['rule_name' => 'name']);
+        return $this->hasMany(RbacRoles::className(), ['rule_name' => 'name']);
     }
 }

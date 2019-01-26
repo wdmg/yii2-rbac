@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model wdmg\rbac\models\RbacItems */
+/* @var $model wdmg\rbac\models\RbacRoles */
 
 $this->title = Yii::t('app/modules/rbac', 'Create Rbac Items');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/rbac', 'Rbac Items'), 'url' => ['index']];

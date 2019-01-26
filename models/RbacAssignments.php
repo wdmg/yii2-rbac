@@ -12,7 +12,7 @@ use \yii\behaviors\TimeStampBehavior;
  * @property int $user_id
  * @property string $created_at
  *
- * @property RbacItems $itemName
+ * @property RbacRoles $itemName
  * @property Users $user
  */
 class RbacAssignments extends \yii\db\ActiveRecord
@@ -54,7 +54,7 @@ class RbacAssignments extends \yii\db\ActiveRecord
             [['created_at'], 'safe'],
             [['item_name'], 'string', 'max' => 64],
             [['item_name', 'user_id'], 'unique', 'targetAttribute' => ['item_name', 'user_id']],
-            [['item_name'], 'exist', 'skipOnError' => true, 'targetClass' => RbacItems::className(), 'targetAttribute' => ['item_name' => 'name']],
+            [['item_name'], 'exist', 'skipOnError' => true, 'targetClass' => RbacRoles::className(), 'targetAttribute' => ['item_name' => 'name']],
         ];
 
         if(class_exists('\wdmg\users\models\Users') && isset(Yii::$app->modules['users']))
@@ -80,7 +80,7 @@ class RbacAssignments extends \yii\db\ActiveRecord
      */
     public function getItemName()
     {
-        return $this->hasOne(RbacItems::className(), ['name' => 'item_name']);
+        return $this->hasOne(RbacRoles::className(), ['name' => 'item_name']);
     }
 
     /**

@@ -26,7 +26,7 @@ class Module extends \yii\base\Module
      */
     public $assignmentTable = '{{%rbac_assignments}}';
     public $itemChildTable = '{{%rbac_childs}}';
-    public $itemTable = '{{%rbac_items}}';
+    public $itemTable = '{{%rbac_roles}}';
     public $ruleTable = '{{%rbac_rules}}';
 
     /**
