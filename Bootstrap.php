@@ -19,9 +19,9 @@ class Bootstrap implements BootstrapInterface
         // Add module URL rules
         $app->getUrlManager()->addRules(
             [
-                $prefix . '<module:rbac>/' => '<module>/rules/index',
-                $prefix . '<module:rbac>/<controller:(rules|items|childs|assignments)>/' => '<module>/<controller>',
-                $prefix . '<module:rbac>/<controller:(rules|items|childs|assignments)>/<action:\w+>' => '<module>/<controller>/<action>',
+                $prefix . '<module:rbac>/' => '<module>/items/index',
+                $prefix . '<module:rbac>/<controller:(items|childs|assignments|rules)>/' => '<module>/<controller>',
+                $prefix . '<module:rbac>/<controller:(items|childs|assignments|rules)>/<action:\w+>' => '<module>/<controller>/<action>',
             ],
             true
         );

@@ -19,7 +19,8 @@ After configure db connection, run the following command in the console:
 
 And select the operation you want to perform:
   1) Apply all module migrations
-  2) Revert all module migrations
+  2) Add base roles and rules for users
+  3) Revert all module migrations
 
 # Migrations
 In any case, you can execute the migration and create the initial data, run the following command in the console:
@@ -56,7 +57,11 @@ $config['bootstrap'][] = 'wdmg\rbac\Bootstrap';
 [Notice] You should configure "authManager" component in config to use database before executing migrations.
 
 # Routing
-`http://example.com/admin/rbac` - Module dashboard
+- `/admin/rbac` - Role and permission
+- `/admin/rbac/items/` - Role and permission, alias of `/admin/rbac/items/`
+- `/admin/rbac/childs/` - Role/permission inheritance from each other
+- `/admin/rbac/assignments/` - Data about the assignment of role/permission to users
+- `/admin/rbac/rules/` - Store individual rules
 
 # Status and version
 * v.1.0.0 - Module in progress development.
