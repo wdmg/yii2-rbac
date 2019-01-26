@@ -3,6 +3,7 @@
 namespace wdmg\rbac\models;
 
 use Yii;
+use \yii\behaviors\TimeStampBehavior;
 
 /**
  * This is the model class for table "rbac_assignments".
@@ -22,6 +23,24 @@ class RbacAssignments extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return '{{rbac_assignments}}';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function behaviors()
+    {
+        return [
+            'timestamp' => [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    self::EVENT_BEFORE_INSERT => 'created_at'
+                ],
+                'value' => function() {
+                    return date("Y-m-d H:i:s");
+                }
+            ],
+        ];
     }
 
     /**
