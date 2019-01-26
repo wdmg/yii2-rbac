@@ -155,6 +155,7 @@ class m190114_193024_rbac extends Migration
         }
 
         if ($this->isMSSQL()) {
+
             $this->execute("CREATE TRIGGER {$schema}.trigger_auth_item_child
             ON {$schema}.{$authManager->itemTable}
             INSTEAD OF DELETE, UPDATE
@@ -189,6 +190,7 @@ class m190114_193024_rbac extends Migration
                         DELETE FROM {$schema}.{$authManager->itemTable} WHERE name IN (SELECT name FROM deleted);
                     END
             END;");
+
         }
 
         $this->createIndex('{{%idx-auth_assignment-user_id}}', $authManager->assignmentTable, 'user_id');
