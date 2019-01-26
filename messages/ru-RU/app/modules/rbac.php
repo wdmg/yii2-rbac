@@ -1,7 +1,40 @@
 <?php
 
 return [
-
+    "Access rules" => "Правила доступа",
+    "Search rule" => "Поиск правил",
+    "Name" => "Название",
+    "Data" => "Данные",
+    "Created At" => "Создано",
+    "Updated At" => "Обновлено",
+    "Search" => "Поиск",
+    "Reset" => "Сброс",
+    "Actions" => "Действия",
+    "Add new rule" => "Добавить новое правило",
+    "Roles and permissions" => "Роли и разрешения",
+    "Search items" => "Поиск ролей и разрешений",
+    "Type" => "Тип",
+    "Description" => "Описание",
+    "Rule Name" => "Название правила",
+    "Add new item" => "Добавить новую роль/разрешение",
+    "Childs of roles and permissions" => "Наследование ролей и разрешений",
+    "Search items childs" => "Поиск наследований",
+    "Parent" => "Родитель",
+    "Child" => "Ребенок",
+    "Add new child" => "Добавить новое наследование",
+    "Access assignments" => "Назначение доступа",
+    "Assignments search" => "Поиск назначений",
+    "Item Name" => "Имя элемента",
+    "User ID" => "ИД пользователя",
+    "Add new assignment" => "Добавить новое назначение",
+    "Rbac Rules" => "Правила доступа",
+    "&larr; Back to list" => "&larr; Обратно к списку",
+    "Edit" => "Редактировать",
+    "Delete" => "Удалить",
+    "Are you sure you want to delete this item?" => "Вы уверены, что хотите удалить этот элемент?",
+    "Rbac Items" => "Роли и разрешения доступа",
+    "Rbac Item Childs" => "Наследования доступа",
+    "Rbac Assignments" => "Назначения доступа",
 ];
 
 ?>
