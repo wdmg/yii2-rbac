@@ -38,6 +38,8 @@ class InitController extends Controller
             Yii::$app->runAction('migrate/up', ['migrationPath' => '@vendor/wdmg/yii2-rbac/migrations', 'interactive' => true]);
         } else if($selected == "2") {
 
+            //@TODO: Seen https://habr.com/ru/post/235485/
+
             // Get auth manager
             $authManager = Yii::$app->authManager;
 
