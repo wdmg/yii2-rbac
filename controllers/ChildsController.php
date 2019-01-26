@@ -8,6 +8,7 @@ use wdmg\rbac\models\RbacItemChildsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * ChildsController implements the CRUD actions for RbacItemChilds model.
@@ -19,14 +20,24 @@ class ChildsController extends Controller
      */
     public function behaviors()
     {
-        return [
+        $behaviors = [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'roles' => ['admin'],
+                        'allow' => true
+                    ],
+                ],
+            ],
         ];
+        return $behaviors;
     }
 
     /**

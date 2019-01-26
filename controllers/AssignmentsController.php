@@ -8,6 +8,7 @@ use wdmg\rbac\models\RbacAssignmentsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * AssignmentsController implements the CRUD actions for RbacAssignments model.
@@ -19,14 +20,24 @@ class AssignmentsController extends Controller
      */
     public function behaviors()
     {
-        return [
+        $behaviors = [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'roles' => ['admin'],
+                        'allow' => true
+                    ],
+                ],
+            ],
         ];
+        return $behaviors;
     }
 
     /**
