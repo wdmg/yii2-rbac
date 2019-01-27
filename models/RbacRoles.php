@@ -190,4 +190,13 @@ class RbacRoles extends \yii\db\ActiveRecord
 
         return $roles_permissions;
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDefault()
+    {
+        $authManager = Yii::$app->getAuthManager();
+        return in_array($this->name, $authManager->defaultRoles);
+    }
 }

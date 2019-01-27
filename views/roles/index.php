@@ -51,6 +51,23 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             'description:ntext',
+            [
+                'attribute' => 'default',
+                'format' => 'html',
+                'filter' => false,
+                'headerOptions' => [
+                    'class' => 'text-center'
+                ],
+                'contentOptions' => [
+                    'class' => 'text-center'
+                ],
+                'value' => function($data) {
+                    if ($data->default)
+                        return '<span class="glyphicon glyphicon-check text-success"></span>';
+                    else
+                        return '<span class="glyphicon glyphicon-check text-muted"></span>';
+                },
+            ],
             'rule_name',
 
             [

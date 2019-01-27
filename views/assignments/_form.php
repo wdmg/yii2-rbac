@@ -15,18 +15,18 @@ use yii\widgets\ActiveForm;
 
     <?php
     $options = array();
-    foreach ($roles as $indx => $object) {
-        $options[$object->name] = $object->name;
-    }
-    echo $form->field($model, 'item_name')->dropDownList($options);
-    ?>
-
-    <?php
-    $options = array();
     foreach ($users as $indx => $object) {
         $options[$object->id] = $object->username . ' [id: ' . $object->id . ']';
     }
     echo $form->field($model, 'user_id')->dropDownList($options);
+    ?>
+
+    <?php
+    $options = array();
+    foreach ($roles as $indx => $object) {
+        $options[$object->name] = $object->name;
+    }
+    echo $form->field($model, 'item_name')->dropDownList($options);
     ?>
 
     <div class="form-group">

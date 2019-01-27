@@ -94,6 +94,8 @@ class Module extends \yii\base\Module
     // Registers auth manager for app
     public function registerAuthManager()
     {
+
+        //$authManager = Yii::$app->authManager;
         $authManager = Yii::$app->getAuthManager();
         if ($authManager) {
             $authManager->assignmentTable = $this->assignmentTable;
