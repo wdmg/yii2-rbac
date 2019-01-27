@@ -7,6 +7,8 @@ use yii\console\Controller;
 use yii\console\ExitCode;
 use yii\helpers\Console;
 use yii\rbac\DbManager;
+use \wdmg\rbac\rules\AuthorRule;
+use \wdmg\rbac\rules\OwnerRule;
 
 class InitController extends Controller
 {
@@ -40,8 +42,10 @@ class InitController extends Controller
 
             //@TODO: Seen https://habr.com/ru/post/235485/
 
+            //$authManager = Yii::$app->authManager;
+
             // Get auth manager
-            $authManager = Yii::$app->authManager;
+            $authManager = Yii::$app->getAuthManager();
 
             // Check if auth manager configured
             if (!$authManager instanceof DbManager) {
@@ -52,9 +56,10 @@ class InitController extends Controller
             echo $this->ansiFormat("\nDelete the old data from the db... ", Console::FG_YELLOW);
 
             // Delete the old data from the db
-            $authManager->removeAll();
-
-            echo $this->ansiFormat("Done.\n", Console::FG_GREEN);
+            if($authManager->removeAll())
+                echo $this->ansiFormat("Done.\n", Console::FG_GREEN);
+            else
+                echo $this->ansiFormat("Error!\n", Console::FG_RED);
 
 
             echo $this->ansiFormat("Create and add the roles... ", Console::FG_YELLOW);
@@ -75,18 +80,23 @@ class InitController extends Controller
             $manager->updatedAt = \date("Y-m-d H:i:s");
             $authManager->add($manager);
 
+            $guest = $authManager->createRole('guest');
+            $guest->createdAt = \date("Y-m-d H:i:s");
+            $guest->updatedAt = \date("Y-m-d H:i:s");
+            $authManager->add($guest);
+
             echo $this->ansiFormat("Done.\n", Console::FG_GREEN);
 
 
             echo $this->ansiFormat("Create rules... ", Console::FG_YELLOW);
 
             // Create and rules
-            $authorRule = new \wdmg\rbac\rules\AuthorRule();
+            $authorRule = new AuthorRule();
             $authorRule->createdAt = \date("Y-m-d H:i:s");
             $authorRule->updatedAt = \date("Y-m-d H:i:s");
             $authManager->add($authorRule);
 
-            $ownerRule = new \wdmg\rbac\rules\OwnerRule();
+            $ownerRule = new OwnerRule();
             $ownerRule->createdAt = \date("Y-m-d H:i:s");
             $ownerRule->updatedAt = \date("Y-m-d H:i:s");
             $authManager->add($ownerRule);

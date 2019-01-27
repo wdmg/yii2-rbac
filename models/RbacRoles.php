@@ -26,6 +26,10 @@ use \yii\behaviors\TimeStampBehavior;
  */
 class RbacRoles extends \yii\db\ActiveRecord
 {
+
+    const TYPE_ROLE = 1;
+    const TYPE_PERMISSION = 2;
+
     /**
      * {@inheritdoc}
      */
@@ -65,6 +69,7 @@ class RbacRoles extends \yii\db\ActiveRecord
             [['created_at', 'updated_at'], 'safe'],
             [['name', 'rule_name'], 'string', 'max' => 64],
             [['name'], 'unique'],
+            [['name'], 'match', 'pattern' => '/^[a-zA-Z0-9_]+$/', 'message' => Yii::t('app/modules/rbac', "Field can contain only latin characters, digits and underscores.")],
             [['rule_name'], 'exist', 'skipOnError' => true, 'targetClass' => RbacRules::className(), 'targetAttribute' => ['rule_name' => 'name']],
         ];
     }
@@ -104,7 +109,7 @@ class RbacRoles extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getRbacItemChilds()
+    public function getRbacItemParents()
     {
         return $this->hasMany(RbacChilds::className(), ['parent' => 'name']);
     }
@@ -112,7 +117,7 @@ class RbacRoles extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getRbacItemChilds0()
+    public function getRbacItemChilds()
     {
         return $this->hasMany(RbacChilds::className(), ['child' => 'name']);
     }
@@ -139,5 +144,50 @@ class RbacRoles extends \yii\db\ActiveRecord
     public function getRuleName()
     {
         return $this->hasOne(RbacRules::className(), ['name' => 'rule_name']);
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllRoles()
+    {
+        $roles = array();
+
+        $authManager = Yii::$app->getAuthManager();
+        foreach ($authManager->getRoles() as $name) {
+            $roles[] = $name;
+        }
+
+        return $roles;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllPermissions()
+    {
+        $permissions = array();
+
+        $authManager = Yii::$app->getAuthManager();
+        foreach ($authManager->getPermissions() as $name) {
+            $permissions[] = $name;
+        }
+
+        return $permissions;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllRolesAndPermissions()
+    {
+        $roles_permissions = array();
+
+        $authManager = Yii::$app->getAuthManager();
+        foreach (array_merge($authManager->getRoles(), $authManager->getPermissions()) as $name) {
+            $roles_permissions[] = $name;
+        }
+
+        return $roles_permissions;
     }
 }

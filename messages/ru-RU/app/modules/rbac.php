@@ -2,6 +2,7 @@
 
 return [
 
+
     "ID" => "ИД",
     "Search rule" => "Поиск правил",
     "Name" => "Название",
@@ -13,15 +14,38 @@ return [
     "Actions" => "Действия",
     "Add new rule" => "Добавить новое правило",
     "Search items" => "Поиск ролей и разрешений",
+    "User" => "Пользователь",
     "Type" => "Тип",
     "Description" => "Описание",
     "Rule Name" => "Название правила",
     "Add new item" => "Добавить новую роль/разрешение",
 
     "Search items childs" => "Поиск наследований",
-    "Parent" => "Родитель",
-    "Child" => "Ребенок",
+    "Parent" => "Базовый",
+    "Child" => "Наследуемый",
     "Add new child" => "Добавить новое наследование",
+
+    "Update" => "Редактирование",
+    "Save" => "Сохранить",
+
+    "Rule name" => "Название правила",
+    "Rule data" => "Данные правила",
+
+    "User role" => "Роль пользователя",
+    "Role" => "Роль",
+    "Permission" => "Разрешение",
+    "User permission" => "Разрешение пользователя",
+
+    "Create role or permission" => "Создать роль или разрешение",
+    "Create inheritance" => "Создать наследование",
+    "Create assignments" => "Создать назначение",
+    "Create rule" => "Создать правило",
+
+    "Update role: {name}" => "Редактирование роли: {name}",
+    "Update rule: {name}" => "Редактирование правила: {name}",
+    "Update permission: {name}" => "Редактирование разрешения: {name}",
+    "Update inheritance: {name}" => "Редактирование наследования: {name}",
+    "Update assignments: {name}" => "Редактирование назначения: {name}",
 
     "Access rules" => "Правила доступа",
     "Here you can specify the rules and access restrictions when using rights and roles." => "Здесь вы можете указать правила и ограничения доступа при использовании прав и ролей.",
@@ -47,6 +71,11 @@ return [
     "Rbac Items" => "Роли и разрешения доступа",
     "Rbac Item Childs" => "Наследования доступа",
     "Rbac Assignments" => "Назначения доступа",
+
+    "Field can contain only latin characters, digits and underscores." => "Поле может содержать только латинские символы, цифры и знак подчёркивания.",
+    "Child and parent don't have to match." => "Ребёнок и родитель не должны совпадать.",
+    "Parent and child don't have to match." => "Родитель и ребёнок не должны совпадать.",
+
 ];
 
 ?>

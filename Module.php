@@ -100,6 +100,7 @@ class Module extends \yii\base\Module
             $authManager->itemChildTable = $this->itemChildTable;
             $authManager->itemTable = $this->itemTable;
             $authManager->ruleTable = $this->ruleTable;
+            $authManager->defaultRoles = ['guest'];
         }
     }
 

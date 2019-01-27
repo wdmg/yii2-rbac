@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model wdmg\rbac\models\RbacRoles */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/rbac', 'Rbac Items'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/rbac', 'Roles and permissions'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 
@@ -21,7 +21,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'name',
-            'type',
+            [
+                'attribute' => 'type',
+                'format' => 'html',
+                'value' => function($data) {
+
+                    if ($data->type == $data::TYPE_ROLE)
+                        return '<span class="label label-success">'.Yii::t('app/modules/rbac','User role').'</span>';
+                    elseif ($data->type == $data::TYPE_PERMISSION)
+                        return '<span class="label label-danger">'.Yii::t('app/modules/rbac','User permission').'</span>';
+                    else
+                        return false;
+
+                },
+            ],
             'description:ntext',
             'rule_name',
             [
@@ -37,9 +50,9 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
     <div class="form-group">
-        <?= Html::a(Yii::t('app/modules/rbac', '&larr; Back to list'), ['items/index'], ['class' => 'btn btn-default pull-left']) ?>&nbsp;
-        <?= Html::a(Yii::t('app/modules/rbac', 'Edit'), ['items/update', 'id' => $model->name], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app/modules/rbac', 'Delete'), ['items/delete', 'id' => $model->name], [
+        <?= Html::a(Yii::t('app/modules/rbac', '&larr; Back to list'), ['roles/index'], ['class' => 'btn btn-default pull-left']) ?>&nbsp;
+        <?= Html::a(Yii::t('app/modules/rbac', 'Edit'), ['roles/update', 'id' => $model->name], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app/modules/rbac', 'Delete'), ['roles/delete', 'id' => $model->name], [
             'class' => 'btn btn-danger pull-right',
             'data' => [
                 'confirm' => Yii::t('app/modules/rbac', 'Are you sure you want to delete this item?'),

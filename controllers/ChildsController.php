@@ -5,6 +5,7 @@ namespace wdmg\rbac\controllers;
 use Yii;
 use wdmg\rbac\models\RbacChilds;
 use wdmg\rbac\models\RbacChildsSearch;
+use wdmg\rbac\models\RbacRoles;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -77,12 +78,14 @@ class ChildsController extends Controller
     public function actionCreate()
     {
         $model = new RbacChilds();
+        $roles = new RbacRoles();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'parent' => $model->parent, 'child' => $model->child]);
         }
 
         return $this->render('create', [
+            'roles' => $roles->getAllRolesAndPermissions(),
             'model' => $model,
         ]);
     }
@@ -98,12 +101,14 @@ class ChildsController extends Controller
     public function actionUpdate($parent, $child)
     {
         $model = $this->findModel($parent, $child);
+        $roles = new RbacRoles();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'parent' => $model->parent, 'child' => $model->child]);
         }
 
         return $this->render('update', [
+            'roles' => $roles->getAllRolesAndPermissions(),
             'model' => $model,
         ]);
     }

@@ -5,6 +5,7 @@ namespace wdmg\rbac\controllers;
 use Yii;
 use wdmg\rbac\models\RbacRoles;
 use wdmg\rbac\models\RbacRolesSearch;
+use wdmg\rbac\models\RbacRules;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -76,12 +77,14 @@ class RolesController extends Controller
     public function actionCreate()
     {
         $model = new RbacRoles();
+        $roles = new RbacRules();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->name]);
         }
 
         return $this->render('create', [
+            'rules' => $roles->getAllRules(),
             'model' => $model,
         ]);
     }
@@ -96,12 +99,14 @@ class RolesController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $roles = new RbacRules();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->name]);
         }
 
         return $this->render('update', [
+            'rules' => $roles->getAllRules(),
             'model' => $model,
         ]);
     }

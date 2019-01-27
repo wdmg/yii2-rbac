@@ -32,8 +32,12 @@ class RbacChilds extends \yii\db\ActiveRecord
             [['parent', 'child'], 'required'],
             [['parent', 'child'], 'string', 'max' => 64],
             [['parent', 'child'], 'unique', 'targetAttribute' => ['parent', 'child']],
+            [['parent', 'child'], 'match', 'pattern' => '/^[a-zA-Z0-9_]+$/', 'message' => Yii::t('app/modules/rbac', "Field can contain only latin characters, digits and underscores.")],
             [['parent'], 'exist', 'skipOnError' => true, 'targetClass' => RbacRoles::className(), 'targetAttribute' => ['parent' => 'name']],
             [['child'], 'exist', 'skipOnError' => true, 'targetClass' => RbacRoles::className(), 'targetAttribute' => ['child' => 'name']],
+            ['child', 'compare', 'compareAttribute' => 'parent', 'operator' => '!==', 'message' => Yii::t('app/modules/rbac', "Child and parent don't have to match.")],
+            ['parent', 'compare', 'compareAttribute' => 'child', 'operator' => '!==', 'message' => Yii::t('app/modules/rbac', "Parent and child don't have to match.")],
+
         ];
     }
 
@@ -51,7 +55,7 @@ class RbacChilds extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getParent0()
+    public function getParent()
     {
         return $this->hasOne(RbacRoles::className(), ['name' => 'parent']);
     }
@@ -59,8 +63,9 @@ class RbacChilds extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getChild0()
+    public function getChild()
     {
         return $this->hasOne(RbacRoles::className(), ['name' => 'child']);
     }
+
 }

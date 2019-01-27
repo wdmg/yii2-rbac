@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'data')->textInput() ?>
+    <? /*= $form->field($model, 'data')->textInput()*/ ?>
 
     <?= $form->field($model, 'created_at')->textInput() ?>
 

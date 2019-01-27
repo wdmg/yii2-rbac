@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model wdmg\rbac\models\RbacRules */
 
-$this->title = Yii::t('app/modules/rbac', 'Update Rbac Rules: {name}', [
+$this->title = Yii::t('app/modules/rbac', 'Update rule: {name}', [
     'name' => $model->name,
 ]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/rbac', 'Rbac Rules'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/rbac', 'Access rules'), 'url' => ['rules/index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->name]];
 $this->params['breadcrumbs'][] = Yii::t('app/modules/rbac', 'Update');
 ?>

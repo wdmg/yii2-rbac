@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model wdmg\rbac\models\RbacRules */
 
-$this->title = Yii::t('app/modules/rbac', 'Create Rbac Rules');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/rbac', 'Rbac Rules'), 'url' => ['index']];
+$this->title = Yii::t('app/modules/rbac', 'Create rule');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/rbac', 'Access rules'), 'url' => ['rules/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="rbac-rules-create">

@@ -55,6 +55,7 @@ class RbacRules extends \yii\db\ActiveRecord
             [['created_at', 'updated_at'], 'safe'],
             [['name'], 'string', 'max' => 64],
             [['name'], 'unique'],
+            [['name'], 'match', 'pattern' => '/^[a-zA-Z0-9_]+$/', 'message' => Yii::t('app/modules/rbac', "Field can contain only latin characters, digits and underscores.")],
         ];
     }
 
@@ -64,8 +65,8 @@ class RbacRules extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'name' => Yii::t('app/modules/rbac', 'Name'),
-            'data' => Yii::t('app/modules/rbac', 'Data'),
+            'name' => Yii::t('app/modules/rbac', 'Rule name'),
+            'data' => Yii::t('app/modules/rbac', 'Rule data'),
             'created_at' => Yii::t('app/modules/rbac', 'Created At'),
             'updated_at' => Yii::t('app/modules/rbac', 'Updated At'),
         ];
@@ -77,5 +78,20 @@ class RbacRules extends \yii\db\ActiveRecord
     public function getRbacItems()
     {
         return $this->hasMany(RbacRoles::className(), ['rule_name' => 'name']);
+    }
+
+    /**
+     * @return array
+     */
+    public function getAllRules()
+    {
+        $rules = array();
+
+        $authManager = Yii::$app->getAuthManager();
+        foreach ($authManager->getRules() as $name) {
+            $rules[] = $name;
+        }
+
+        return $rules;
     }
 }

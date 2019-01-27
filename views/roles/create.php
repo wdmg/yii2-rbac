@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model wdmg\rbac\models\RbacRoles */
 
-$this->title = Yii::t('app/modules/rbac', 'Create Rbac Items');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/rbac', 'Rbac Items'), 'url' => ['index']];
+$this->title = Yii::t('app/modules/rbac', 'Create role or permission');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/rbac', 'Roles and permissions'), 'url' => ['roles/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="rbac-items-create">
@@ -14,6 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
+        'rules' => $rules,
         'model' => $model,
     ]) ?>
 

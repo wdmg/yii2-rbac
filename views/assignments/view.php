@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model wdmg\rbac\models\RbacAssignments */
 
 $this->title = $model->item_name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/rbac', 'Rbac Assignments'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/rbac', 'Access assignments'), 'url' => ['assignments/index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 
@@ -21,7 +21,23 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'item_name',
-            'user_id',
+            [
+                'attribute' => 'user_id',
+                'format' => 'html',
+                'label' => Yii::t('app/modules/tickets', 'User'),
+                'value' => function($model) {
+                    if($model->user_id == $model->user['id'])
+                        if($model->user['id'] && $model->user['username'])
+                            return Html::a($model->user['username'], ['../admin/users/view/?id='.$model->user['id']], [
+                                'target' => '_blank',
+                                'data-pjax' => 0
+                            ]);
+                        else
+                            return $model->user_id;
+                    else
+                        return $model->user_id;
+                }
+            ],
             'created_at',
         ],
     ]) ?>

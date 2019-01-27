@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model wdmg\rbac\models\RbacChilds */
 
 $this->title = $model->parent;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/rbac', 'Rbac Item Childs'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/rbac', 'Inheritance permissions and roles'), 'url' => ['childs/index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 

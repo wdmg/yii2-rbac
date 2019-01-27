@@ -5,6 +5,7 @@ namespace wdmg\rbac\controllers;
 use Yii;
 use wdmg\rbac\models\RbacAssignments;
 use wdmg\rbac\models\RbacAssignmentsSearch;
+use wdmg\rbac\models\RbacRoles;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -82,7 +83,18 @@ class AssignmentsController extends Controller
             return $this->redirect(['view', 'item_name' => $model->item_name, 'user_id' => $model->user_id]);
         }
 
+        //@TODO: ReBuild based on Yii::$app->getUser()->identityClass in future
+
+        if(class_exists('\wdmg\users\models\Users') && isset(Yii::$app->modules['users']))
+            $users = new \wdmg\users\models\Users();
+        else
+            $users = Yii::$app->getUser()->identityClass::className();
+
+        $roles = new RbacRoles();
+
         return $this->render('create', [
+            'users' => $users->getAllUsers(),
+            'roles' => $roles->getAllRoles(),
             'model' => $model,
         ]);
     }
@@ -103,7 +115,18 @@ class AssignmentsController extends Controller
             return $this->redirect(['view', 'item_name' => $model->item_name, 'user_id' => $model->user_id]);
         }
 
+        //@TODO: ReBuild based on Yii::$app->getUser()->identityClass in future
+
+        if(class_exists('\wdmg\users\models\Users') && isset(Yii::$app->modules['users']))
+            $users = new \wdmg\users\models\Users();
+        else
+            $users = Yii::$app->getUser()->identityClass::className();
+
+        $roles = new RbacRoles();
+
         return $this->render('update', [
+            'users' => $users->getAllUsers(),
+            'roles' => $roles->getAllRoles(),
             'model' => $model,
         ]);
     }

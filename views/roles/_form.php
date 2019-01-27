@@ -14,13 +14,22 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'type')->textInput() ?>
+    <?= $form->field($model, 'type')->dropDownList([
+        $model::TYPE_ROLE => Yii::t('app/modules/rbac','User role'),
+        $model::TYPE_PERMISSION => Yii::t('app/modules/rbac','User permission'),
+    ]); ?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'rule_name')->textInput(['maxlength' => true]) ?>
+    <?php
+    $options = array();
+    foreach ($rules as $indx => $object) {
+        $options[$object->name] = $object->name;
+    }
+    echo $form->field($model, 'rule_name')->dropDownList($options);
+    ?>
 
-    <?= $form->field($model, 'data')->textInput() ?>
+    <?php /*= $form->field($model, 'data')->textInput()*/ ?>
 
     <?= $form->field($model, 'created_at')->textInput() ?>
 

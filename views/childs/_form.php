@@ -12,9 +12,14 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'parent')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'child')->textInput(['maxlength' => true]) ?>
+    <?php
+        $options = array();
+        foreach ($roles as $indx => $object) {
+            $options[$object->name] = $object->name;
+        }
+        echo $form->field($model, 'parent')->dropDownList($options);
+        echo $form->field($model, 'child')->dropDownList(array_reverse($options));
+    ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app/modules/rbac', 'Save'), ['class' => 'btn btn-success']) ?>

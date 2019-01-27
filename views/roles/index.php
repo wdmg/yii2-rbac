@@ -29,7 +29,27 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'name',
-            'type',
+            [
+                'attribute' => 'type',
+                'format' => 'html',
+                'filter' => false,
+                'headerOptions' => [
+                    'class' => 'text-center'
+                ],
+                'contentOptions' => [
+                    'class' => 'text-center'
+                ],
+                'value' => function($data) {
+
+                    if ($data->type == $data::TYPE_ROLE)
+                        return '<span class="label label-success">'.Yii::t('app/modules/rbac','Role').'</span>';
+                    elseif ($data->type == $data::TYPE_PERMISSION)
+                        return '<span class="label label-danger">'.Yii::t('app/modules/rbac','Permission').'</span>';
+                    else
+                        return false;
+
+                },
+            ],
             'description:ntext',
             'rule_name',
 
@@ -45,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::end(); ?>
 
     <div>
-        <?= Html::a(Yii::t('app/modules/rbac', 'Add new item'), ['items/create'], ['class' => 'btn btn-success pull-right']) ?>
+        <?= Html::a(Yii::t('app/modules/rbac', 'Add new item'), ['roles/create'], ['class' => 'btn btn-success pull-right']) ?>
     </div>
 </div>
 
