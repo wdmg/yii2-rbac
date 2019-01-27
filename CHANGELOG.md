@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 1.0.2 (2019-01-27)
+ * Bugfix and refactoring
+ 
 ## 1.0.1 (2019-01-27)
  * Added some new methods, selectbox for view inputs, translations
  

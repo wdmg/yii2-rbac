@@ -64,4 +64,4 @@ $config['bootstrap'][] = 'wdmg\rbac\Bootstrap';
 - `/admin/rbac/rules/` - Store individual rules
 
 # Status and version
-* v.1.0.1 - Module in progress development.
+* v.1.0.2 - Module in progress development.
