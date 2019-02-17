@@ -41,7 +41,7 @@ To add a module to the project, add the following data in your configuration fil
     ],
     'modules' => [
         ...
-        'tickets' => [
+        'rbac' => [
             'class' => 'wdmg\rbac\Module',
             'routePrefix' => 'admin'
         ],
