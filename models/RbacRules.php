@@ -22,7 +22,10 @@ class RbacRules extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{rbac_rules}}';
+        if(\Yii::$app->getModule('rbac')->ruleTable)
+            return Yii::$app->controller->module->ruleTable;
+        else
+            return '{{%rbac_rules}}';
     }
 
     /**

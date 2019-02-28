@@ -63,5 +63,8 @@ $config['bootstrap'][] = 'wdmg\rbac\Bootstrap';
 - `/admin/rbac/assignments/` - Data about the assignment of role/permission to users
 - `/admin/rbac/rules/` - Store individual rules
 
-# Status and version
-* v.1.0.2 - Module in progress development.
+# Status and version [in progress development]
+* v.1.0.3 - Fixing tables names in migrations
+* v.1.0.2 - Bugfix and refactoring
+* v.1.0.1 - Added some new methods, selectbox for view inputs, translations
+* v.1.0.0 - First pre-release

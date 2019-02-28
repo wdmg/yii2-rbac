@@ -22,7 +22,10 @@ class RbacAssignments extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{rbac_assignments}}';
+        if(\Yii::$app->getModule('rbac')->assignmentTable)
+            return Yii::$app->controller->module->assignmentTable;
+        else
+            return '{{%rbac_assignments}}';
     }
 
     /**

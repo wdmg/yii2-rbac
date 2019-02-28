@@ -35,7 +35,10 @@ class RbacRoles extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{rbac_roles}}';
+        if(\Yii::$app->getModule('rbac')->itemTable)
+            return Yii::$app->controller->module->itemTable;
+        else
+            return '{{%rbac_roles}}';
     }
 
     /**

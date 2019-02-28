@@ -20,7 +20,10 @@ class RbacChilds extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{rbac_childs}}';
+        if(\Yii::$app->getModule('rbac')->itemChildTable)
+            return Yii::$app->controller->module->itemChildTable;
+        else
+            return '{{%rbac_childs}}';
     }
 
     /**
