@@ -53,6 +53,7 @@ return [
     "Roles and permissions" => "Роли и права доступа",
     "Here you can add access roles and permissions, as well as attach access rules to them." => "Здесь вы можете добавлять роли и права доступа, а также привязывать к ним правила.",
 
+    "Inheritance rules" => "Правила наследования",
     "Inheritance permissions and roles" => "Наследование прав и ролей",
     "Here you can specify which roles and rights are inherited. The nesting level of inherited rights is not limited." => "Здесь вы можете указать какие роли и права наследуется. Уровень вложенности наследуемых прав не ограничен.",
 
@@ -68,6 +69,7 @@ return [
     "Edit" => "Редактировать",
     "Delete" => "Удалить",
     "Are you sure you want to delete this item?" => "Вы уверены, что хотите удалить этот элемент?",
+
     "Rbac Items" => "Роли и разрешения доступа",
     "Rbac Item Childs" => "Наследования доступа",
     "Rbac Assignments" => "Назначения доступа",

@@ -57,13 +57,21 @@ $config['bootstrap'][] = 'wdmg\rbac\Bootstrap';
 [Notice] You should configure "authManager" component in config to use database before executing migrations.
 
 # Routing
-- `/admin/rbac` - Role and permission
-- `/admin/rbac/roles/` - Role and permission, alias of `/admin/rbac/`
-- `/admin/rbac/childs/` - Role/permission inheritance from each other
-- `/admin/rbac/assignments/` - Data about the assignment of role/permission to users
-- `/admin/rbac/rules/` - Store individual rules
+Use the `Module::dashboardNavItems()` method of the module to generate a navigation items list for NavBar, like this:
+
+    <?php
+        echo Nav::widget([
+        'options' => ['class' => 'navbar-nav navbar-right'],
+            'label' => 'Modules',
+            'items' => [
+                Yii::$app->getModule('rbac')->dashboardNavItems(),
+                ...
+            ]
+        ]);
+    ?>
 
 # Status and version [in progress development]
+* v.1.0.4 - Added dashboard navigation items for NavBar
 * v.1.0.3 - Fixing tables names in migrations
 * v.1.0.2 - Bugfix and refactoring
 * v.1.0.1 - Added some new methods, selectbox for view inputs, translations

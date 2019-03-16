@@ -42,7 +42,7 @@ class Module extends \yii\base\Module
     /**
      * @var string the module version
      */
-    private $version = "1.0.3";
+    private $version = "1.0.4";
 
     /**
      * @var integer, priority of initialization
@@ -78,6 +78,9 @@ class Module extends \yii\base\Module
 
         // Register translations
         $this->registerTranslations();
+
+        // Normalize route prefix
+        $this->routePrefixNormalize();
 
     }
 
@@ -138,5 +141,54 @@ class Module extends \yii\base\Module
     public static function t($category, $message, $params = [], $language = null)
     {
         return Yii::t('app/modules/rbac' . $category, $message, $params, $language);
+    }
+
+    /**
+     * Normalize route prefix
+     * @return string of current route prefix
+     */
+    public function routePrefixNormalize()
+    {
+        if(!empty($this->routePrefix)) {
+            $this->routePrefix = str_replace('/', '', $this->routePrefix);
+            $this->routePrefix = '/'.$this->routePrefix;
+            $this->routePrefix = str_replace('//', '/', $this->routePrefix);
+        }
+        return $this->routePrefix;
+    }
+
+    /**
+     * Build dashboard navigation items for NavBar
+     * @return array of current module nav items
+     */
+    public function dashboardNavItems()
+    {
+        return [
+            'label' => Yii::t('app/modules/rbac', 'RBAC'),
+            'url' => '#',
+            'active' => in_array(\Yii::$app->controller->module->id, ['rbac']),
+            'items' => [
+                [
+                    'label' => Yii::t('app/modules/rbac', 'Roles and permissions'),
+                    'url' => [$this->routePrefix . '/rbac/roles/'],
+                    'active' => (in_array(\Yii::$app->controller->module->id, ['rbac']) &&  Yii::$app->controller->id == 'roles'),
+                ],
+                [
+                    'label' => Yii::t('app/modules/rbac', 'Inheritance rules'),
+                    'url' => [$this->routePrefix . '/rbac/childs/'],
+                    'active' => (in_array(\Yii::$app->controller->module->id, ['rbac']) &&  Yii::$app->controller->id == 'childs'),
+                ],
+                [
+                    'label' => Yii::t('app/modules/rbac', 'Access rules'),
+                    'url' => [$this->routePrefix . '/rbac/rules/'],
+                    'active' => (in_array(\Yii::$app->controller->module->id, ['rbac']) &&  Yii::$app->controller->id == 'rules'),
+                ],
+                [
+                    'label' => Yii::t('app/modules/rbac', 'Access assignments'),
+                    'url' => [$this->routePrefix . '/rbac/assignments/'],
+                    'active' => (in_array(\Yii::$app->controller->module->id, ['rbac']) &&  Yii::$app->controller->id == 'assignments'),
+                ],
+            ]
+        ];
     }
 }
