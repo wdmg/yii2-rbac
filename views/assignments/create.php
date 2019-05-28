@@ -6,6 +6,7 @@ use yii\helpers\Html;
 /* @var $model wdmg\rbac\models\RbacAssignments */
 
 $this->title = Yii::t('app/modules/rbac', 'Create assignments');
+$this->params['breadcrumbs'][] = ['label' => $this->context->module->name, 'url' => ['rbac/index']];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/rbac', 'Access assignments'), 'url' => ['assignments/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

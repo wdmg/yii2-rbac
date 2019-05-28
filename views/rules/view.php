@@ -8,6 +8,7 @@ use yii\helpers\VarDumper;
 /* @var $model wdmg\rbac\models\RbacRules */
 
 $this->title = $model->name;
+$this->params['breadcrumbs'][] = ['label' => $this->context->module->name, 'url' => ['rbac/index']];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/rbac', 'Access rules'), 'url' => ['rules/index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);

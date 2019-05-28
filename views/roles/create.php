@@ -6,6 +6,7 @@ use yii\helpers\Html;
 /* @var $model wdmg\rbac\models\RbacRoles */
 
 $this->title = Yii::t('app/modules/rbac', 'Create role or permission');
+$this->params['breadcrumbs'][] = ['label' => $this->context->module->name, 'url' => ['rbac/index']];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/rbac', 'Roles and permissions'), 'url' => ['roles/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

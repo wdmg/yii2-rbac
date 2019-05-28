@@ -7,6 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model wdmg\rbac\models\RbacAssignments */
 
 $this->title = $model->item_name;
+$this->params['breadcrumbs'][] = ['label' => $this->context->module->name, 'url' => ['rbac/index']];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/rbac', 'Access assignments'), 'url' => ['assignments/index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);

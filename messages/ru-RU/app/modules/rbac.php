@@ -3,6 +3,9 @@
 return [
 
 
+    "RBAC" => "RBAC",
+    "Role Based Access Control" => "Ролевое управление доступом",
+
     "ID" => "ИД",
     "Search rule" => "Поиск правил",
     "Name" => "Название",

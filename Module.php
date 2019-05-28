@@ -6,7 +6,7 @@ namespace wdmg\rbac;
  * Yii2 Role-based access control
  *
  * @category        Module
- * @version         1.0.4
+ * @version         1.1.0
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/yii2-rbac
  * @copyright       Copyright (c) 2019 W.D.M.Group, Ukraine
@@ -47,6 +47,16 @@ class Module extends \yii\base\Module
     public $routePrefix = "admin";
 
     /**
+     * @var string, the name of module
+     */
+    public $name = "RBAC";
+
+    /**
+     * @var string, the description of module
+     */
+    public $description = "Role Based Access Control";
+
+    /**
      * @var string the vendor name of module
      */
     private $vendor = "wdmg";
@@ -54,7 +64,7 @@ class Module extends \yii\base\Module
     /**
      * @var string the module version
      */
-    private $version = "1.0.4";
+    private $version = "1.1.0";
 
     /**
      * @var integer, priority of initialization
@@ -148,6 +158,10 @@ class Module extends \yii\base\Module
 
             },
         ];
+
+        // Name and description translation of module
+        $this->name = Yii::t('app/modules/rbac', $this->name);
+        $this->description = Yii::t('app/modules/rbac', $this->description);
     }
 
     public static function t($category, $message, $params = [], $language = null)
@@ -176,7 +190,7 @@ class Module extends \yii\base\Module
     public function dashboardNavItems()
     {
         return [
-            'label' => Yii::t('app/modules/rbac', 'RBAC'),
+            'label' => $this->name,
             'url' => '#',
             'active' => in_array(\Yii::$app->controller->module->id, ['rbac']),
             'items' => [

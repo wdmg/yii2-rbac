@@ -6,6 +6,7 @@ use yii\helpers\Html;
 /* @var $model wdmg\rbac\models\RbacChilds */
 
 $this->title = Yii::t('app/modules/rbac', 'Create inheritance');
+$this->params['breadcrumbs'][] = ['label' => $this->context->module->name, 'url' => ['rbac/index']];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/rbac', 'Inheritance permissions and roles'), 'url' => ['childs/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
