@@ -6,7 +6,7 @@ namespace wdmg\rbac;
  * Yii2 Role-based access control
  *
  * @category        Module
- * @version         1.1.0
+ * @version         1.1.1
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/yii2-rbac
  * @copyright       Copyright (c) 2019 W.D.M.Group, Ukraine
@@ -64,7 +64,7 @@ class Module extends \yii\base\Module
     /**
      * @var string the module version
      */
-    private $version = "1.1.0";
+    private $version = "1.1.1";
 
     /**
      * @var integer, priority of initialization
