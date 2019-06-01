@@ -32,7 +32,7 @@ class RolesController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'roles' => ['admin'],
+                        'roles' => ['@'],
                         'allow' => true
                     ],
                 ],
