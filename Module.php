@@ -6,7 +6,7 @@ namespace wdmg\rbac;
  * Yii2 Role-based access control
  *
  * @category        Module
- * @version         1.1.2
+ * @version         1.1.3
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/yii2-rbac
  * @copyright       Copyright (c) 2019 W.D.M.Group, Ukraine
@@ -15,12 +15,13 @@ namespace wdmg\rbac;
  */
 
 use Yii;
+use wdmg\base\BaseModule;
 
 
 /**
- * rbac module definition class
+ * RBAC module definition class
  */
-class Module extends \yii\base\Module
+class Module extends BaseModule
 {
 
     /**
@@ -42,11 +43,6 @@ class Module extends \yii\base\Module
     public $ruleTable = '{{%rbac_rules}}';
 
     /**
-     * @var string the prefix for routing of module
-     */
-    public $routePrefix = "admin";
-
-    /**
      * {@inheritdoc}
      */
     public $defaultRoute = "rbac/index";
@@ -62,24 +58,14 @@ class Module extends \yii\base\Module
     public $description = "Role Based Access Control";
 
     /**
-     * @var string the vendor name of module
-     */
-    private $vendor = "wdmg";
-
-    /**
      * @var string the module version
      */
-    private $version = "1.1.2";
+    private $version = "1.1.3";
 
     /**
      * @var integer, priority of initialization
      */
     private $priority = 6;
-
-    /**
-     * @var array of strings missing translations
-     */
-    public $missingTranslation;
 
     /**
      * {@inheritdoc}
@@ -88,13 +74,6 @@ class Module extends \yii\base\Module
     {
         parent::init();
 
-        // Set controller namespace for console commands
-        if (Yii::$app instanceof \yii\console\Application)
-            $this->controllerNamespace = 'wdmg\rbac\commands';
-
-        // Set current version of module
-        $this->setVersion($this->version);
-
         // Set default user identity class
         /*if ($this->userClass === null)
             $this->userClass = Yii::$app->getUser()->identityClass;
@@ -102,35 +81,6 @@ class Module extends \yii\base\Module
 
         // Register auth manager tables
         $this->registerAuthManager();
-
-        // Register translations
-        $this->registerTranslations();
-
-        // Normalize route prefix
-        $this->routePrefixNormalize();
-
-    }
-
-    /**
-     * Return module vendor
-     * @var string of current module vendor
-     */
-    public function getVendor() {
-        return $this->vendor;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function afterAction($action, $result)
-    {
-
-        // Log to debuf console missing translations
-        if (is_array($this->missingTranslation) && YII_ENV == 'dev')
-            Yii::warning('Missing translations: ' . var_export($this->missingTranslation, true), 'i18n');
-
-        $result = parent::afterAction($action, $result);
-        return $result;
 
     }
 
@@ -147,45 +97,6 @@ class Module extends \yii\base\Module
             $authManager->ruleTable = $this->ruleTable;
             $authManager->defaultRoles = ['guest'];
         }
-    }
-
-    // Registers translations for the module
-    public function registerTranslations()
-    {
-        Yii::$app->i18n->translations['app/modules/rbac'] = [
-            'class' => 'yii\i18n\PhpMessageSource',
-            'sourceLanguage' => 'en',
-            'basePath' => '@vendor/wdmg/yii2-rbac/messages',
-            'on missingTranslation' => function($event) {
-
-                if (YII_ENV == 'dev')
-                    $this->missingTranslation[] = $event->message;
-
-            },
-        ];
-
-        // Name and description translation of module
-        $this->name = Yii::t('app/modules/rbac', $this->name);
-        $this->description = Yii::t('app/modules/rbac', $this->description);
-    }
-
-    public static function t($category, $message, $params = [], $language = null)
-    {
-        return Yii::t('app/modules/rbac' . $category, $message, $params, $language);
-    }
-
-    /**
-     * Normalize route prefix
-     * @return string of current route prefix
-     */
-    public function routePrefixNormalize()
-    {
-        if(!empty($this->routePrefix)) {
-            $this->routePrefix = str_replace('/', '', $this->routePrefix);
-            $this->routePrefix = '/'.$this->routePrefix;
-            $this->routePrefix = str_replace('//', '/', $this->routePrefix);
-        }
-        return $this->routePrefix;
     }
 
     /**
@@ -221,5 +132,11 @@ class Module extends \yii\base\Module
                 ],
             ]
         ];
+    }
+
+
+    public function bootstrap($app)
+    {
+        parent::bootstrap($app);
     }
 }
