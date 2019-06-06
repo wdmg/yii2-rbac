@@ -32,7 +32,7 @@ class AssignmentsController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'roles' => ['@'],
+                        'roles' => ['admin'],
                         'allow' => true
                     ],
                 ],

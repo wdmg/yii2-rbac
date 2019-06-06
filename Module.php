@@ -6,7 +6,7 @@ namespace wdmg\rbac;
  * Yii2 Role-based access control
  *
  * @category        Module
- * @version         1.1.3
+ * @version         1.1.4
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/yii2-rbac
  * @copyright       Copyright (c) 2019 W.D.M.Group, Ukraine
@@ -60,7 +60,7 @@ class Module extends BaseModule
     /**
      * @var string the module version
      */
-    private $version = "1.1.3";
+    private $version = "1.1.4";
 
     /**
      * @var integer, priority of initialization
@@ -81,6 +81,12 @@ class Module extends BaseModule
 
         // Register auth manager tables
         $this->registerAuthManager();
+
+        // Set version of current module
+        $this->setVersion($this->version);
+
+        // Set priority of current module
+        $this->setPriority($this->priority);
 
     }
 
@@ -134,7 +140,9 @@ class Module extends BaseModule
         ];
     }
 
-
+    /**
+     * {@inheritdoc}
+     */
     public function bootstrap($app)
     {
         parent::bootstrap($app);
