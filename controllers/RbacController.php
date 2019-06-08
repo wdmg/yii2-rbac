@@ -35,6 +35,20 @@ class RbacController extends Controller
                 ],
             ],
         ];
+
+        // If auth manager not configured use default access control
+        if(!Yii::$app->authManager) {
+            $behaviors['access'] = [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'roles' => ['@'],
+                        'allow' => true
+                    ],
+                ]
+            ];
+        }
+
         return $behaviors;
     }
 

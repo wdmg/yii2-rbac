@@ -79,15 +79,6 @@ class Module extends BaseModule
             $this->userClass = Yii::$app->getUser()->identityClass;
         */
 
-        // Register auth manager tables
-        $this->registerAuthManager();
-
-        // Set version of current module
-        $this->setVersion($this->version);
-
-        // Set priority of current module
-        $this->setPriority($this->priority);
-
     }
 
     // Registers auth manager for app
@@ -140,11 +131,20 @@ class Module extends BaseModule
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+
     public function bootstrap($app)
     {
         parent::bootstrap($app);
+
+        // Configure authManager component
+        $app->setComponents([
+            'authManager' => [
+                'class' => 'yii\rbac\DbManager',
+                'cache' => 'cache',
+            ]
+        ]);
+
+        // Register auth manager tables
+        $this->registerAuthManager();
     }
 }
