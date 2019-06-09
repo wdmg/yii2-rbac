@@ -1,10 +1,10 @@
 {
   "name": "wdmg/yii2-rbac",
-  "description": "RBAC management module for Yii2",
+  "description": "RBAC management module",
   "keywords": ["yii2", "yii2-rbac", "rbac", "rbac manager", "wdmg"],
   "type": "yii2-extension",
   "license": "MIT",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "homepage": "https://github.com/wdmg/yii2-rbac",
   "support": {
     "source": "https://github.com/wdmg/yii2-rbac",
