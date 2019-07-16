@@ -4,7 +4,7 @@
   "keywords": ["yii2", "yii2-rbac", "rbac", "rbac manager", "wdmg"],
   "type": "yii2-extension",
   "license": "MIT",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "homepage": "https://github.com/wdmg/yii2-rbac",
   "support": {
     "source": "https://github.com/wdmg/yii2-rbac",
@@ -27,6 +27,15 @@
   "autoload": {
     "psr-4": {
       "wdmg\\rbac\\": ""
+    }
+  },
+  "extra": {
+    "options": {
+      "routePrefix": "admin",
+      "assignmentTable": "{{%rbac_assignments}}",
+      "itemChildTable": "{{%rbac_childs}}",
+      "itemTable": "{{%rbac_roles}}",
+      "ruleTable": "{{%rbac_rules}}"
     }
   }
 }

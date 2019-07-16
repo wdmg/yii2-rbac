@@ -6,7 +6,7 @@ namespace wdmg\rbac;
  * Yii2 Role-based access control
  *
  * @category        Module
- * @version         1.1.5
+ * @version         1.1.6
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/yii2-rbac
  * @copyright       Copyright (c) 2019 W.D.M.Group, Ukraine
@@ -60,7 +60,7 @@ class Module extends BaseModule
     /**
      * @var string the module version
      */
-    private $version = "1.1.5";
+    private $version = "1.1.6";
 
     /**
      * @var integer, priority of initialization
@@ -104,7 +104,8 @@ class Module extends BaseModule
         return [
             'label' => $this->name,
             'url' => '#',
-            'active' => in_array(\Yii::$app->controller->module->id, ['rbac']),
+            'icon' => 'fa-lock',
+            'active' => in_array(\Yii::$app->controller->module->id, [$this->id]),
             'items' => [
                 [
                     'label' => Yii::t('app/modules/rbac', 'Roles and permissions'),
