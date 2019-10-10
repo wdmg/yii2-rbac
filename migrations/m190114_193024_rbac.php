@@ -124,7 +124,7 @@ class m190114_193024_rbac extends Migration
         $this->createTable($authManager->assignmentTable, [
             'item_name' => $this->string(64)->notNull(),
             'user_id' => $this->integer(11)->notNull(),
-            'created_at' => $this->dateTime()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
+            'created_at' => $this->integer(), // Fix Invalid datetime format: 1292 Incorrect datetime value
             'PRIMARY KEY ([[item_name]], [[user_id]])',
         ], $tableOptions);
 

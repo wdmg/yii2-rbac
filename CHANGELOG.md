@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 1.1.7 (2019-10-10)
+ * Fix Invalid datetime format
+
 ## 1.1.6 (2019-07-16)
  * Added extra options to composer.json and navbar menu icon
 

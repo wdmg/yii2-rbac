@@ -78,21 +78,26 @@ class InitController extends Controller
             $admin = $authManager->createRole('admin');
             $admin->createdAt = \date("Y-m-d H:i:s");
             $admin->updatedAt = \date("Y-m-d H:i:s");
+
+
+            $admin->createdAt = \date("Y-m-d H:i:s", strtotime(date("Y-m-d H:i:s") . " -1 days" . " -2 hours"));
+            $admin->updatedAt = \date("Y-m-d H:i:s", strtotime(date("Y-m-d H:i:s") . " -1 days" . " -2 hours"));
+
             $authManager->add($admin);
 
             $editor = $authManager->createRole('editor');
-            $editor->createdAt = \date("Y-m-d H:i:s");
-            $editor->updatedAt = \date("Y-m-d H:i:s");
+            $editor->createdAt = \date("Y-m-d H:i:s", strtotime(date("Y-m-d H:i:s") . " -1 days" . " -2 hours"));
+            $editor->updatedAt = \date("Y-m-d H:i:s", strtotime(date("Y-m-d H:i:s") . " -1 days" . " -2 hours"));
             $authManager->add($editor);
 
             $manager = $authManager->createRole('manager');
-            $manager->createdAt = \date("Y-m-d H:i:s");
-            $manager->updatedAt = \date("Y-m-d H:i:s");
+            $manager->createdAt = \date("Y-m-d H:i:s", strtotime(date("Y-m-d H:i:s") . " -1 days" . " -2 hours"));
+            $manager->updatedAt = \date("Y-m-d H:i:s", strtotime(date("Y-m-d H:i:s") . " -1 days" . " -2 hours"));
             $authManager->add($manager);
 
             $guest = $authManager->createRole('guest');
-            $guest->createdAt = \date("Y-m-d H:i:s");
-            $guest->updatedAt = \date("Y-m-d H:i:s");
+            $guest->createdAt = \date("Y-m-d H:i:s", strtotime(date("Y-m-d H:i:s") . " -1 days" . " -2 hours"));
+            $guest->updatedAt = \date("Y-m-d H:i:s", strtotime(date("Y-m-d H:i:s") . " -1 days" . " -2 hours"));
             $authManager->add($guest);
 
             echo $this->ansiFormat("Done.\n", Console::FG_GREEN);
@@ -102,13 +107,13 @@ class InitController extends Controller
 
             // Create and rules
             $authorRule = new AuthorRule();
-            $authorRule->createdAt = \date("Y-m-d H:i:s");
-            $authorRule->updatedAt = \date("Y-m-d H:i:s");
+            $authorRule->createdAt = \date("Y-m-d H:i:s", strtotime(date("Y-m-d H:i:s") . " -1 days" . " -2 hours"));
+            $authorRule->updatedAt = \date("Y-m-d H:i:s", strtotime(date("Y-m-d H:i:s") . " -1 days" . " -2 hours"));
             $authManager->add($authorRule);
 
             $ownerRule = new OwnerRule();
-            $ownerRule->createdAt = \date("Y-m-d H:i:s");
-            $ownerRule->updatedAt = \date("Y-m-d H:i:s");
+            $ownerRule->createdAt = \date("Y-m-d H:i:s", strtotime(date("Y-m-d H:i:s") . " -1 days" . " -2 hours"));
+            $ownerRule->updatedAt = \date("Y-m-d H:i:s", strtotime(date("Y-m-d H:i:s") . " -1 days" . " -2 hours"));
             $authManager->add($ownerRule);
 
             echo $this->ansiFormat("Done.\n", Console::FG_GREEN);
@@ -120,15 +125,15 @@ class InitController extends Controller
             $editAdminPages = $authManager->createPermission('editAdminPages');
             $editAdminPages->description = 'Access to edit data from admin pages';
             $editAdminPages->ruleName = $authorRule->name;
-            $editAdminPages->createdAt = \date("Y-m-d H:i:s");
-            $editAdminPages->updatedAt = \date("Y-m-d H:i:s");
+            $editAdminPages->createdAt = \date("Y-m-d H:i:s", strtotime(date("Y-m-d H:i:s") . " -1 days" . " -2 hours"));
+            $editAdminPages->updatedAt = \date("Y-m-d H:i:s", strtotime(date("Y-m-d H:i:s") . " -1 days" . " -2 hours"));
             $authManager->add($editAdminPages);
 
             $viewAdminPages = $authManager->createPermission('viewAdminPages');
             $viewAdminPages->description = 'Access to view data from admin pages';
             $viewAdminPages->ruleName = $ownerRule->name;
-            $viewAdminPages->createdAt = \date("Y-m-d H:i:s");
-            $viewAdminPages->updatedAt = \date("Y-m-d H:i:s");
+            $viewAdminPages->createdAt = \date("Y-m-d H:i:s", strtotime(date("Y-m-d H:i:s") . " -1 days" . " -2 hours"));
+            $viewAdminPages->updatedAt = \date("Y-m-d H:i:s", strtotime(date("Y-m-d H:i:s") . " -1 days" . " -2 hours"));
             $authManager->add($viewAdminPages);
 
             // Editor can edit information from admin pages
@@ -148,19 +153,8 @@ class InitController extends Controller
 
             // Assign roles to users
             $assigned = $authManager->assign($admin, 100);
-            $model = \wdmg\rbac\models\RbacAssignments::findOne(['user_id' => $assigned->userId, 'item_name' => $assigned->roleName]);
-            $model->created_at = \date("Y-m-d H:i:s", intval($assigned->createdAt));
-            $model->update();
-
             $assigned = $authManager->assign($editor, 101);
-            $model = \wdmg\rbac\models\RbacAssignments::findOne(['user_id' => $assigned->userId, 'item_name' => $assigned->roleName]);
-            $model->created_at = \date("Y-m-d H:i:s", intval($assigned->createdAt));
-            $model->update();
-
             $assigned = $authManager->assign($manager, 102);
-            $model = \wdmg\rbac\models\RbacAssignments::findOne(['user_id' => $assigned->userId, 'item_name' => $assigned->roleName]);
-            $model->created_at = \date("Y-m-d H:i:s", intval($assigned->createdAt));
-            $model->update();
 
             echo $this->ansiFormat("Done.\n\n", Console::FG_GREEN);
 
