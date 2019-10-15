@@ -65,7 +65,7 @@ class Module extends BaseModule
     /**
      * @var integer, priority of initialization
      */
-    private $priority = 6;
+    private $priority = 2;
 
     /**
      * {@inheritdoc}
