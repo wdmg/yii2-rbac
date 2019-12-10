@@ -23,13 +23,13 @@ class AssignmentsController extends Controller
     {
         $behaviors = [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
             ],
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'rules' => [
                     [
                         'roles' => ['admin'],
@@ -42,7 +42,7 @@ class AssignmentsController extends Controller
         // If auth manager not configured use default access control
         if(!Yii::$app->authManager) {
             $behaviors['access'] = [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'rules' => [
                     [
                         'roles' => ['@'],
@@ -102,7 +102,7 @@ class AssignmentsController extends Controller
         if(class_exists('\wdmg\users\models\Users') && isset(Yii::$app->modules['users']))
             $users = new \wdmg\users\models\Users();
         else
-            $users = Yii::$app->getUser()->identityClass::className();
+            $users = Yii::$app->getUser()->identityClass::class;
 
         $roles = new RbacRoles();
 
@@ -134,7 +134,7 @@ class AssignmentsController extends Controller
         if(class_exists('\wdmg\users\models\Users') && isset(Yii::$app->modules['users']))
             $users = new \wdmg\users\models\Users();
         else
-            $users = Yii::$app->getUser()->identityClass::className();
+            $users = Yii::$app->getUser()->identityClass::class;
 
         $roles = new RbacRoles();
 

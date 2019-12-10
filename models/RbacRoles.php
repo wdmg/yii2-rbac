@@ -48,7 +48,7 @@ class RbacRoles extends \yii\db\ActiveRecord
     {
         return [
             'timestamp' => [
-                'class' => TimestampBehavior::className(),
+                'class' => TimestampBehavior::class,
                 'attributes' => [
                     self::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
                     self::EVENT_BEFORE_UPDATE => 'updated_at',
@@ -73,7 +73,7 @@ class RbacRoles extends \yii\db\ActiveRecord
             [['name', 'rule_name'], 'string', 'max' => 64],
             [['name'], 'unique'],
             [['name'], 'match', 'pattern' => '/^[a-zA-Z0-9_]+$/', 'message' => Yii::t('app/modules/rbac', "Field can contain only latin characters, digits and underscores.")],
-            [['rule_name'], 'exist', 'skipOnError' => true, 'targetClass' => RbacRules::className(), 'targetAttribute' => ['rule_name' => 'name']],
+            [['rule_name'], 'exist', 'skipOnError' => true, 'targetClass' => RbacRules::class, 'targetAttribute' => ['rule_name' => 'name']],
         ];
     }
 
@@ -98,7 +98,7 @@ class RbacRoles extends \yii\db\ActiveRecord
      */
     public function getRbacAssignments()
     {
-        return $this->hasMany(RbacAssignments::className(), ['item_name' => 'name']);
+        return $this->hasMany(RbacAssignments::class, ['item_name' => 'name']);
     }
 
     /**
@@ -106,7 +106,7 @@ class RbacRoles extends \yii\db\ActiveRecord
      */
     public function getUsers()
     {
-        return $this->hasMany(Users::className(), ['id' => 'user_id'])->viaTable('rbac_assignments', ['item_name' => 'name']);
+        return $this->hasMany(Users::class, ['id' => 'user_id'])->viaTable('rbac_assignments', ['item_name' => 'name']);
     }
 
     /**
@@ -114,7 +114,7 @@ class RbacRoles extends \yii\db\ActiveRecord
      */
     public function getRbacItemParents()
     {
-        return $this->hasMany(RbacChilds::className(), ['parent' => 'name']);
+        return $this->hasMany(RbacChilds::class, ['parent' => 'name']);
     }
 
     /**
@@ -122,7 +122,7 @@ class RbacRoles extends \yii\db\ActiveRecord
      */
     public function getRbacItemChilds()
     {
-        return $this->hasMany(RbacChilds::className(), ['child' => 'name']);
+        return $this->hasMany(RbacChilds::class, ['child' => 'name']);
     }
 
     /**
@@ -130,7 +130,7 @@ class RbacRoles extends \yii\db\ActiveRecord
      */
     public function getChildren()
     {
-        return $this->hasMany(RbacRoles::className(), ['name' => 'child'])->viaTable('rbac_item_childs', ['parent' => 'name']);
+        return $this->hasMany(RbacRoles::class, ['name' => 'child'])->viaTable('rbac_item_childs', ['parent' => 'name']);
     }
 
     /**
@@ -138,7 +138,7 @@ class RbacRoles extends \yii\db\ActiveRecord
      */
     public function getParents()
     {
-        return $this->hasMany(RbacRoles::className(), ['name' => 'parent'])->viaTable('rbac_item_childs', ['child' => 'name']);
+        return $this->hasMany(RbacRoles::class, ['name' => 'parent'])->viaTable('rbac_item_childs', ['child' => 'name']);
     }
 
     /**
@@ -146,7 +146,7 @@ class RbacRoles extends \yii\db\ActiveRecord
      */
     public function getRuleName()
     {
-        return $this->hasOne(RbacRules::className(), ['name' => 'rule_name']);
+        return $this->hasOne(RbacRules::class, ['name' => 'rule_name']);
     }
 
     /**

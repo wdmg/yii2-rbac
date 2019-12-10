@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 1.1.8 (2019-12-10)
+ * Fixed deprecated class declaration
+ 
 ## 1.1.7 (2019-10-10)
  * Fix Invalid datetime format
 
