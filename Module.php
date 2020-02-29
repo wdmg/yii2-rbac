@@ -73,19 +73,11 @@ class Module extends BaseModule
     public function init()
     {
         parent::init();
-
-        // Set default user identity class
-        /*if ($this->userClass === null)
-            $this->userClass = Yii::$app->getUser()->identityClass;
-        */
-
     }
 
     // Registers auth manager for app
     public function registerAuthManager()
     {
-
-        //$authManager = Yii::$app->authManager;
         $authManager = Yii::$app->getAuthManager();
         if ($authManager) {
             $authManager->assignmentTable = $this->assignmentTable;
@@ -104,7 +96,7 @@ class Module extends BaseModule
         return [
             'label' => $this->name,
             'url' => '#',
-            'icon' => 'fa-lock',
+            'icon' => 'fa fa-fw fa-lock',
             'active' => in_array(\Yii::$app->controller->module->id, [$this->id]),
             'items' => [
                 [
