@@ -78,6 +78,21 @@ $this->params['breadcrumbs'][] = $this->title;
                 ]
             ],
         ],
+        'pager' => [
+            'options' => [
+                'class' => 'pagination',
+            ],
+            'maxButtonCount' => 5,
+            'activePageCssClass' => 'active',
+            'prevPageCssClass' => '',
+            'nextPageCssClass' => '',
+            'firstPageCssClass' => 'previous',
+            'lastPageCssClass' => 'next',
+            'firstPageLabel' => Yii::t('app/modules/rbac', 'First page'),
+            'lastPageLabel'  => Yii::t('app/modules/rbac', 'Last page'),
+            'prevPageLabel'  => Yii::t('app/modules/rbac', '&larr; Prev page'),
+            'nextPageLabel'  => Yii::t('app/modules/rbac', 'Next page &rarr;')
+        ],
     ]); ?>
     <?php Pjax::end(); ?>
 

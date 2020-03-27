@@ -51,6 +51,11 @@ return [
     "Update assignments: {name}" => "Редактирование назначения: {name}",
     "Inheritance child: {name}" => "Наследование ребенка: {name}",
 
+    'First page' => 'Первая страница',
+    'Last page' => 'Последняя страница',
+    '&larr; Prev page' => '&larr; Предыдущая страница',
+    'Next page &rarr;' => 'Следующая страница &rarr;',
+
     "Access rules" => "Правила доступа",
     "Here you can specify the rules and access restrictions when using rights and roles." => "Здесь вы можете указать правила и ограничения доступа при использовании прав и ролей.",
 
