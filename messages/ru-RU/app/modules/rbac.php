@@ -83,6 +83,14 @@ return [
     "Rbac Item Childs" => "Наследования доступа",
     "Rbac Assignments" => "Назначения доступа",
 
+    "Error" => "Ошибка",
+    "Error {code}. Not found" => "Ошибка {code}. Не найдено",
+    "Error {code}. Forbidden" => "Ошибка {code}. Запрещено",
+    "Error {code}" => "Ошибка {code}",
+    "Error {code}. {message}" => "Ошибка {code}. {message}",
+    "Page not found." => "Страница не найдена.",
+    "You are not allowed to perform this action." => "Вы не можете выполнить это действие.",
+
     "Field can contain only latin characters, digits and underscores." => "Поле может содержать только латинские символы, цифры и знак подчёркивания.",
     "Child and parent don't have to match." => "Ребёнок и родитель не должны совпадать.",
     "Parent and child don't have to match." => "Родитель и ребёнок не должны совпадать.",

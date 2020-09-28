@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($model) {
                     if($model->user_id == $model->user['id'])
                         if($model->user['id'] && $model->user['username'])
-                            return Html::a($model->user['username'], ['../admin/users/view/?id='.$model->user['id']], [
+                            return Html::a($model->user['username'], ['/admin/users/view', 'id' => $model->user['id']], [
                                 'target' => '_blank',
                                 'data-pjax' => 0
                             ]);
@@ -42,12 +42,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'created_at:datetime',
         ],
     ]) ?>
-
+    <hr/>
     <div class="form-group">
         <?= Html::a(Yii::t('app/modules/rbac', '&larr; Back to list'), ['assignments/index'], ['class' => 'btn btn-default pull-left']) ?>&nbsp;
-        <?= Html::a(Yii::t('app/modules/rbac', 'Edit'), ['assignments/update', 'item_name' => $model->item_name, 'user_id' => $model->user_id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a(Yii::t('app/modules/rbac', 'Edit'), ['assignments/update', 'item_name' => $model->item_name, 'user_id' => $model->user_id], ['class' => 'btn btn-edit btn-primary']) ?>
         <?= Html::a(Yii::t('app/modules/rbac', 'Delete'), ['assignments/delete', 'item_name' => $model->item_name, 'user_id' => $model->user_id], [
-            'class' => 'btn btn-danger pull-right',
+            'class' => 'btn btn-delete btn-danger pull-right',
             'data' => [
                 'confirm' => Yii::t('app/modules/rbac', 'Are you sure you want to delete this item?'),
                 'method' => 'post',

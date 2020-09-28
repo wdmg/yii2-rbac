@@ -61,4 +61,22 @@ class RbacController extends Controller
         return $this->render('index');
     }
 
+    public function beforeAction($action)
+    {
+        if ($action->actionMethod == "actionError") {
+            return $this->actionError();
+        }
+
+        return parent::beforeAction($action);
+    }
+
+    public function actionError()
+    {
+        $exception = Yii::$app->errorHandler->exception;
+        if ($exception !== null) {
+            $this->layout = 'dashboard';
+            return $this->render('error', ['exception' => $exception]);
+        }
+    }
+
 }

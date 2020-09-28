@@ -16,6 +16,21 @@ use yii\filters\AccessControl;
  */
 class AssignmentsController extends Controller
 {
+
+    private $_module;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function init()
+    {
+        parent::init();
+
+        if (!($this->_module = Yii::$app->getModule('admin/rbac')))
+            $this->_module = Yii::$app->getModule('rbac');
+
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -99,10 +114,10 @@ class AssignmentsController extends Controller
 
         //@TODO: ReBuild based on Yii::$app->getUser()->identityClass in future
 
-        if(class_exists('\wdmg\users\models\Users') && isset(Yii::$app->modules['users']))
+        if (class_exists('\wdmg\users\models\Users') && $this->_module->moduleLoaded('users'))
             $users = new \wdmg\users\models\Users();
         else
-            $users = Yii::$app->getUser()->identityClass::class;
+            $users = Yii::$app->getUser()->identityClass;
 
         $roles = new RbacRoles();
 
@@ -131,10 +146,10 @@ class AssignmentsController extends Controller
 
         //@TODO: ReBuild based on Yii::$app->getUser()->identityClass in future
 
-        if(class_exists('\wdmg\users\models\Users') && isset(Yii::$app->modules['users']))
+        if (class_exists('\wdmg\users\models\Users') && $this->_module->moduleLoaded('users'))
             $users = new \wdmg\users\models\Users();
         else
-            $users = Yii::$app->getUser()->identityClass::class;
+            $users = Yii::$app->getUser()->identityClass;
 
         $roles = new RbacRoles();
 

@@ -15,19 +15,19 @@ $this->params['breadcrumbs'][] = $this->title;
         <ul class="list-unstyled">
             <li class="btn-group" style="padding:0 15px 15px 0;">
                 <?= Html::a(Yii::t('app/modules/rbac', 'Roles and permissions'), ['roles/index'], ['class' => 'btn btn-default']) ?>
-                <?= Html::a(Yii::t('app/modules/rbac', 'Add new item'), ['roles/create'], ['class' => 'btn btn-success']) ?>
+                <?= Html::a(Yii::t('app/modules/rbac', 'Add new item'), ['roles/create'], ['class' => 'btn btn-add btn-success']) ?>
             </li>
             <li class="btn-group" style="padding:0 15px 15px 0;">
                 <?= Html::a(Yii::t('app/modules/rbac', 'Inheritance rules'), ['childs/index'], ['class' => 'btn btn-default']) ?>
-                <?= Html::a(Yii::t('app/modules/rbac', 'Add new child'), ['childs/create'], ['class' => 'btn btn-warning']) ?>
+                <?= Html::a(Yii::t('app/modules/rbac', 'Add new child'), ['childs/create'], ['class' => 'btn btn-add btn-warning']) ?>
             </li>
             <li class="btn-group" style="padding:0 15px 15px 0;">
                 <?= Html::a(Yii::t('app/modules/rbac', 'Access rules'), ['rules/index'], ['class' => 'btn btn-default']) ?>
-                <?= Html::a(Yii::t('app/modules/rbac', 'Add new rule'), ['rules/create'], ['class' => 'btn btn-danger']) ?>
+                <?= Html::a(Yii::t('app/modules/rbac', 'Add new rule'), ['rules/create'], ['class' => 'btn btn-add btn-danger']) ?>
             </li>
             <li class="btn-group" style="padding:0 15px 15px 0;">
                 <?= Html::a(Yii::t('app/modules/rbac', 'Access assignments'), ['assignments/index'], ['class' => 'btn btn-default']) ?>
-                <?= Html::a(Yii::t('app/modules/rbac', 'Add new assignment'), ['assignments/create'], ['class' => 'btn btn-info']) ?>
+                <?= Html::a(Yii::t('app/modules/rbac', 'Add new assignment'), ['assignments/create'], ['class' => 'btn btn-add btn-info']) ?>
             </li>
         </ul>
     </div>

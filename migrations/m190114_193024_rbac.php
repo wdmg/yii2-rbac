@@ -59,6 +59,9 @@ class m190114_193024_rbac extends Migration
     public function safeUp()
     {
 
+        if (!($module = Yii::$app->getModule('admin/rbac')))
+            $module = Yii::$app->getModule('rbac');
+
         $authManager = $this->getAuthManager();
         $this->db = $authManager->db;
         $schema = $this->db->getSchema()->defaultSchema;
@@ -139,7 +142,7 @@ class m190114_193024_rbac extends Migration
         );
 
         // If exist module `Users` set foreign key `user_id` to `users.id`
-        if(class_exists('\wdmg\users\models\Users') && isset(Yii::$app->modules['users'])) {
+        if (class_exists('\wdmg\users\models\Users') && $module->moduleLoaded('users')) {
 
             $userTable = \wdmg\users\models\Users::tableName();
             $this->addForeignKey(

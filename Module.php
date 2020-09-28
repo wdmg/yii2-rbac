@@ -73,6 +73,13 @@ class Module extends BaseModule
     public function init()
     {
         parent::init();
+
+        // Set version of current module
+        $this->setVersion($this->version);
+
+        // Set priority of current module
+        $this->setPriority($this->priority);
+
     }
 
     // Registers auth manager for app
@@ -132,11 +139,67 @@ class Module extends BaseModule
         $app->setComponents([
             'authManager' => [
                 'class' => 'yii\rbac\DbManager',
-                'cache' => 'cache',
+                'cache' => 'cache'
             ]
         ]);
 
+        // Set error handler
+        if (!($app instanceof \yii\console\Application) && $this->isBackend()) {
+            if ($errorHandler = $app->getErrorHandler()) {
+                $errorHandler->errorAction = $this->routePrefix . '/rbac/rbac/error';
+            } else {
+                $app->setComponents([
+                    'errorHandler' => [
+                        'errorAction' => $this->routePrefix . '/rbac/rbac/error'
+                    ]
+                ]);
+            }
+        }
+
         // Register auth manager tables
         $this->registerAuthManager();
+
+        // Check basic access for backend
+        if (!($app instanceof \yii\console\Application) && $this->isBackend()) {
+            \yii\base\Event::on(\yii\web\Controller::class, \yii\web\Controller::EVENT_BEFORE_ACTION, function ($event) use ($app) {
+
+                // Build current route
+                $route = '';
+                if ($modules = $event->action->controller->modules) {
+                    foreach ($modules as $module) {
+                        // Exclude itself and app as module
+                        if (!($module->id == $event->action->controller->module->id) && !($module->id == $app->id)) {
+                            $route .= (empty($route)) ? $module->id : '/' . $module->id;
+                        }
+                    }
+                }
+
+                if ($module = $event->action->controller->module->id);
+                    $route .= (empty($module)) ? $module : '/' . $module;
+
+                if ($controller = $event->action->controller->id);
+                    $route .= (empty($controller)) ? $controller : '/' . $controller;
+
+                if ($action = $event->action->id);
+                    $route .= (empty($action)) ? $action : '/' . $action;
+
+                // Get all available routes from RBAC
+                $routes = [];
+                if ($permissions = $app->authManager->permissions) {
+                    foreach ($permissions as $permission) {
+                        if ($permission->type == \wdmg\rbac\models\RbacRoles::TYPE_ROUTE)
+                            $routes[] = $permission->name;
+                    }
+                }
+
+                // Check if exist and check access
+                if (!empty($route) && !empty($routes)) {
+                    if (!$app->user->can($route) && in_array($route, $routes, true)) {
+                        throw new \yii\web\ForbiddenHttpException('Access denied. You are not allowed to perform this action.');
+                    }
+                }
+
+            });
+        }
     }
 }

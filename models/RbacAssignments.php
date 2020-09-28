@@ -17,16 +17,28 @@ use \yii\behaviors\TimeStampBehavior;
  */
 class RbacAssignments extends \yii\db\ActiveRecord
 {
+
+    private $_module;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function init()
+    {
+        parent::init();
+
+        if (!($this->_module = Yii::$app->getModule('admin/rbac')))
+            $this->_module = Yii::$app->getModule('rbac');
+
+    }
+
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        if (!($module = Yii::$app->getModule('admin/rbac')))
-            $module = Yii::$app->getModule('rbac');
-
-        if ($module)
-            return $module->assignmentTable;
+        if (Yii::$app->controller->module)
+            return Yii::$app->controller->module->assignmentTable;
         else
             return '{{%rbac_assignments}}';
     }
@@ -64,7 +76,7 @@ class RbacAssignments extends \yii\db\ActiveRecord
             [['item_name'], 'exist', 'skipOnError' => true, 'targetClass' => RbacRoles::class, 'targetAttribute' => ['item_name' => 'name']],
         ];
 
-        if(class_exists('\wdmg\users\models\Users') && isset(Yii::$app->modules['users']))
+        if (class_exists('\wdmg\users\models\Users') && $this->_module->moduleLoaded('users'))
             $rules[] = [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => \wdmg\users\models\Users::class, 'targetAttribute' => ['user_id' => 'id']];
 
         return $rules;
@@ -95,9 +107,9 @@ class RbacAssignments extends \yii\db\ActiveRecord
      */
     public function getUser($user_id = null)
     {
-        if(class_exists('\wdmg\users\models\Users') && isset(Yii::$app->modules['users']) && !$user_id)
+        if (class_exists('\wdmg\users\models\Users') && $this->_module->moduleLoaded('users') && !$user_id)
             return $this->hasOne(\wdmg\users\models\Users::class, ['id' => 'user_id']);
-        else if(class_exists('\wdmg\users\models\Users') && isset(Yii::$app->modules['users']) && $user_id)
+        else if (class_exists('\wdmg\users\models\Users') && $this->_module->moduleLoaded('users') && $user_id)
             return \wdmg\users\models\Users::findOne(['id' => intval($user_id)]);
         else
             return null;

@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 1.1.*
+ * ErrorHandler and custom error page
+
 ## 1.1.9 (2020-03-27)
  * Added pagination
  * Up to date dependencies
