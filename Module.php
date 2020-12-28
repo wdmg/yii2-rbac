@@ -91,7 +91,7 @@ class Module extends BaseModule
             $authManager->itemChildTable = $this->itemChildTable;
             $authManager->itemTable = $this->itemTable;
             $authManager->ruleTable = $this->ruleTable;
-            $authManager->defaultRoles = ['guest'];
+            $authManager->defaultRoles = ['user'];
         }
     }
 

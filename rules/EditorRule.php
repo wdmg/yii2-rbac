@@ -4,15 +4,13 @@ namespace wdmg\rbac\rules;
 
 use yii\rbac\Rule;
 
-class AuthorRule extends Rule
+class EditorRule extends Rule
 {
-    public $name = 'isAuthor';
+    public $name = 'isEditor';
 
     public function execute($user_id, $item, $params)
     {
-        //return isset($params['created_by']) ? ($params['created_by'] == $user_id) : false;
         return isset($params['created_by']) ? ($params['created_by'] == $user_id || (isset($params['updated_by']) ? $params['updated_by'] == $user_id : false)) : false;
-
     }
 }
 

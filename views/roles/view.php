@@ -36,7 +36,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 },
             ],
-            'description:ntext',
+            [
+                'attribute' => 'description',
+                'format' => 'text',
+                'value' => function($data) {
+                    return Yii::t('app/modules/rbac', $data->description);
+                }
+            ],
             'rule_name',
             [
                 'attribute' => 'data',

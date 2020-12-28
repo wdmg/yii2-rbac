@@ -153,31 +153,39 @@ class InitController extends Controller
             echo $this->ansiFormat("Add permissions as childs of roles... ", Console::FG_YELLOW);
 
             $admin = $authManager->getRole('admin');
-            $editor = $authManager->getRole('editor');
-            $manager = $authManager->getRole('manager');
+            $manager = $authManager->getRole('editor');
+            $editor = $authManager->getRole('manager');
             $viewDashboard = $authManager->getPermission('viewDashboard');
             $updateDashboard = $authManager->getPermission('updateDashboard');
 
-            // The manager can only edit his own publications
-            $updateOwnerPosts = $authManager->getPermission('updateOwnerPosts');
-            $authManager->addChild($manager, $updateOwnerPosts);
+            // Content manager can view everything
+            $authManager->addChild($manager, $viewDashboard);
 
-            // The editor can edit any publication
+            // Content manager can update self posts
             $updatePosts = $authManager->getPermission('updatePosts');
-            $authManager->addChild($editor, $updatePosts);
+            $updateOwnerPosts = $authManager->getPermission('updateOwnerPosts');
             $authManager->addChild($updateOwnerPosts, $updatePosts);
 
-            // Admin can edit modules and publications
-            $authManager->addChild($admin, $updateDashboard);
-            $authManager->addChild($admin, $updatePosts);
+            // Editor can update everything posts
+            $authManager->addChild($editor, $updatePosts);
 
-            // Anyone who can edit modules and publications can and view them
+            // Editor can do everything that a content manager can
+            $authManager->addChild($editor, $manager);
+
+            // Anyone who can edit everything can also view everything
             $authManager->addChild($updateDashboard, $viewDashboard);
 
-            // All roles have access to the administrative interface
-            $authManager->addChild($admin, $viewDashboard);
-            $authManager->addChild($editor, $viewDashboard);
-            $authManager->addChild($manager, $viewDashboard);
+            // Editor can edit everything
+            $authManager->addChild($admin, $updateDashboard);
+
+            // Administrator can do everything that a content manager can
+            $authManager->addChild($admin, $updatePosts);
+            $authManager->addChild($admin, $editor);
+
+
+
+
+
 
             echo $this->ansiFormat("Done.\n\n", Console::FG_GREEN);
 

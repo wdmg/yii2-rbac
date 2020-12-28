@@ -51,7 +51,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 },
             ],
-            'description:ntext',
+            [
+                'attribute' => 'description',
+                'format' => 'text',
+                'value' => function($data) {
+                    return Yii::t('app/modules/rbac', $data->description);
+                }
+            ],
             [
                 'attribute' => 'default',
                 'format' => 'html',
@@ -84,10 +90,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'maxButtonCount' => 5,
             'activePageCssClass' => 'active',
-            'prevPageCssClass' => '',
-            'nextPageCssClass' => '',
-            'firstPageCssClass' => 'previous',
-            'lastPageCssClass' => 'next',
+            'prevPageCssClass' => 'prev',
+            'nextPageCssClass' => 'next',
+            'firstPageCssClass' => 'first',
+            'lastPageCssClass' => 'last',
             'firstPageLabel' => Yii::t('app/modules/rbac', 'First page'),
             'lastPageLabel'  => Yii::t('app/modules/rbac', 'Last page'),
             'prevPageLabel'  => Yii::t('app/modules/rbac', '&larr; Prev page'),

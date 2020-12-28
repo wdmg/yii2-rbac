@@ -28,6 +28,22 @@ return [
     "Child" => "Наследуемый",
     "Add new child" => "Добавить новое наследование",
 
+    "Administrator" => "Администратор",
+    "Administrator role" => "Роль администратора",
+    "Editor" => "Редактор",
+    "Editor role" => "Роль редактора",
+    "Content Manager" => "Контент-менеджер",
+    "Content manager role" => "Роль контент-менеджера",
+    "Default User" => "Пользователь",
+    "Default user role" => "Роль обычного пользователя",
+    "Blocked User" => "Заблокированный пользователь",
+    "Blocked user role" => "Роль заблокированного пользователя",
+
+    "Access permission to view all of modules in dashboard" => "Разрешение для просмотра всех модулей в панели",
+    "Access permission to edit all of modules in dashboard" => "Разрешение для редактирования всех модулей в панели",
+    "Access permission to edit all posts" => "Разрешение для редактирования всех записей",
+    "Access permission to edit posts by owner" => "Разрешение для редактирования всех записей их создателем",
+
     "Update" => "Редактирование",
     "Save" => "Сохранить",
 

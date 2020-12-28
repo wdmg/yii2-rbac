@@ -91,14 +91,14 @@ class RolesController extends Controller
     public function actionCreate()
     {
         $model = new RbacRoles();
-        $roles = new RbacRules();
+        $rules = new RbacRules();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->name]);
         }
 
         return $this->render('create', [
-            'rules' => $roles->getAllRules(),
+            'rules' => $rules->getAllRules(),
             'model' => $model,
         ]);
     }
@@ -113,14 +113,14 @@ class RolesController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $roles = new RbacRules();
+        $rules = new RbacRules();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->name]);
         }
 
         return $this->render('update', [
-            'rules' => $roles->getAllRules(),
+            'rules' => $rules->getAllRules(),
             'model' => $model,
         ]);
     }

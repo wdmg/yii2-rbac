@@ -2,6 +2,7 @@ Changelog
 =========
 
 ## 1.1.*
+ * Start of implementation of RBAC for related modules
  * ErrorHandler and custom error page
 
 ## 1.1.9 (2020-03-27)
