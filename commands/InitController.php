@@ -35,7 +35,7 @@ class InitController extends Controller
             '║                                                ║'. "\n" .
             '║              RBAC MODULE, v.'.$version.'              ║'. "\n" .
             '║          by Alexsander Vyshnyvetskyy           ║'. "\n" .
-            '║       (c) 2019-2020 W.D.M.Group, Ukraine       ║'. "\n" .
+            '║       (c) 2019-2021 W.D.M.Group, Ukraine       ║'. "\n" .
             '║                                                ║'. "\n" .
             '╚════════════════════════════════════════════════╝';
         echo $name = $this->ansiFormat($welcome . "\n\n", Console::FG_GREEN);
@@ -128,6 +128,12 @@ class InitController extends Controller
             $permission->updatedAt = \date("Y-m-d H:i:s");
             $authManager->add($permission);
 
+            /*$permission = $authManager->createPermission('updateSettings');
+            $permission->description = 'Access permission to update settings';
+            $permission->createdAt = \date("Y-m-d H:i:s");
+            $permission->updatedAt = \date("Y-m-d H:i:s");
+            $authManager->add($permission);*/
+
             echo $this->ansiFormat("Done.\n", Console::FG_GREEN);
 
 
@@ -173,6 +179,10 @@ class InitController extends Controller
 
             // Anyone who can edit modules and publications can and view them
             $authManager->addChild($updateDashboard, $viewDashboard);
+
+            // Admin can edit settings
+            /*$updateSettings = $authManager->getPermission('updateSettings');
+            $authManager->addChild($admin, $updateSettings);*/
 
             // All roles have access to the administrative interface
             $authManager->addChild($admin, $viewDashboard);

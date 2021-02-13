@@ -61,12 +61,13 @@ class ChildsController extends Controller
      */
     public function actionIndex()
     {
+        $rolesModel = new RbacRoles();
         $searchModel = new RbacChildsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'rolesModel' => $rolesModel,
         ]);
     }
 

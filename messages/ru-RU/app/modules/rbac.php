@@ -24,7 +24,7 @@ return [
     "Add new item" => "Добавить новую роль/разрешение",
 
     "Search items childs" => "Поиск наследований",
-    "Parent" => "Базовый",
+    "Parent" => "Родитель",
     "Child" => "Наследуемый",
     "Add new child" => "Добавить новое наследование",
 
@@ -80,7 +80,7 @@ return [
 
     "Inheritance rules" => "Правила наследования",
     "Inheritance permissions and roles" => "Наследование прав и ролей",
-    "Here you can specify which roles and rights are inherited. The nesting level of inherited rights is not limited." => "Здесь вы можете указать какие роли и права наследуется. Уровень вложенности наследуемых прав не ограничен.",
+    "Here you can specify which roles and rights are inherited. The nesting level of inherited rights is not limited." => "Здесь вы можете указать какие роли и права наследуются. Уровень вложенности наследуемых прав не ограничен.",
 
     "Access assignments" => "Назначение доступа",
     "Here you can assign access roles to specific users." => "Здесь вы можете привязывать роли доступа к конкретным пользователям.",

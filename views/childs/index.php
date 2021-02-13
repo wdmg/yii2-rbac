@@ -29,8 +29,36 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'parent',
-            'child',
+            [
+                'attribute' => 'parent',
+                'format' => 'raw',
+                'value' => function($data) use ($rolesModel) {
+                    if ($type = $data->getParentType()) {
+                        if ($type == $rolesModel::TYPE_ROLE)
+                            return $data->parent . " " . Html::tag('sup', "[" . Yii::t('app/modules/rbac', 'Role') . "]", ['class' => "text-success"]);
+                        elseif ($type == $rolesModel::TYPE_PERMISSION)
+                            return $data->parent . " " . Html::tag('sup', "[" . Yii::t('app/modules/rbac', 'Permission') . "]", ['class' => "text-danger"]);
+
+                    }
+
+                    return $data->parent;
+                }
+            ],
+            [
+                'attribute' => 'child',
+                'format' => 'raw',
+                'value' => function($data) use ($rolesModel) {
+                    if ($type = $data->getChildType()) {
+                        if ($type == $rolesModel::TYPE_ROLE)
+                            return $data->child . " " . Html::tag('sup', "[" . Yii::t('app/modules/rbac', 'Role') . "]", ['class' => "text-success"]);
+                        elseif ($type == $rolesModel::TYPE_PERMISSION)
+                            return $data->child . " " . Html::tag('sup', "[" . Yii::t('app/modules/rbac', 'Permission') . "]", ['class' => "text-danger"]);
+
+                    }
+
+                    return $data->child;
+                }
+            ],
 
             [
                 'class' => 'yii\grid\ActionColumn',

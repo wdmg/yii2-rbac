@@ -66,9 +66,25 @@ class RbacChilds extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getParentType()
+    {
+        return self::getParent()->one()->type;
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getChild()
     {
         return $this->hasOne(RbacRoles::class, ['name' => 'child']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getChildType()
+    {
+        return self::getChild()->one()->type;
     }
 
 }
