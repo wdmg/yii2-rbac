@@ -69,6 +69,7 @@ Use the `Module::dashboardNavItems()` method of the module to generate a navigat
     ?>
 
 # Status and version [in progress development]
+* v.1.1.10 - RBAC implementation for related modules
 * v.1.1.9 - Added pagination, up to date dependencies
 * v.1.1.8 - Fixed deprecated class declaration
 * v.1.1.7 - Fix Invalid datetime format

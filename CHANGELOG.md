@@ -1,7 +1,7 @@
 Changelog
 =========
 
-## 1.1.*
+## 1.1.10
  * RBAC child`s
  * Start of implementation of RBAC for related modules
  * ErrorHandler and custom error page

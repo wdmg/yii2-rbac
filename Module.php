@@ -6,7 +6,7 @@ namespace wdmg\rbac;
  * Yii2 Role-based access control
  *
  * @category        Module
- * @version         1.1.9
+ * @version         1.1.10
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/yii2-rbac
  * @copyright       Copyright (c) 2019 - 2021 W.D.M.Group, Ukraine
@@ -43,6 +43,11 @@ class Module extends BaseModule
     public $ruleTable = '{{%rbac_rules}}';
 
     /**
+     * @var string the error handler action route
+     */
+    public $errorAction = 'rbac/rbac/error';
+
+    /**
      * {@inheritdoc}
      */
     public $defaultRoute = "rbac/index";
@@ -60,7 +65,7 @@ class Module extends BaseModule
     /**
      * @var string the module version
      */
-    private $version = "1.1.9";
+    private $version = "1.1.10";
 
     /**
      * @var integer, priority of initialization
@@ -145,14 +150,18 @@ class Module extends BaseModule
 
         // Set error handler
         if (!($app instanceof \yii\console\Application) && $this->isBackend()) {
-            if ($errorHandler = $app->getErrorHandler()) {
-                $errorHandler->errorAction = $this->routePrefix . '/rbac/rbac/error';
+            if ($errorHandlerAction = (isset(Yii::$app->params['rbac.errorAction'])) ? Yii::$app->params['rbac.errorAction'] : $this->errorAction) {
+                if ($errorHandler = $app->getErrorHandler()) {
+                    $errorHandler->errorAction = $this->routePrefix . '/' . $errorHandlerAction;
+                } else {
+                    $app->setComponents([
+                        'errorHandler' => [
+                            'errorAction' => $this->routePrefix . '/' . $errorHandlerAction
+                        ]
+                    ]);
+                }
             } else {
-                $app->setComponents([
-                    'errorHandler' => [
-                        'errorAction' => $this->routePrefix . '/rbac/rbac/error'
-                    ]
-                ]);
+                Yii::debug('Error handler action not set.', 'rbac');
             }
         }
 
