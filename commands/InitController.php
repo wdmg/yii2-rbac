@@ -33,9 +33,9 @@ class InitController extends Controller
         $welcome =
             '╔════════════════════════════════════════════════╗'. "\n" .
             '║                                                ║'. "\n" .
-            '║              RBAC MODULE, v.'.$version.'              ║'. "\n" .
+            '║              RBAC MODULE, v.'.$version.'             ║'. "\n" .
             '║          by Alexsander Vyshnyvetskyy           ║'. "\n" .
-            '║       (c) 2019-2021 W.D.M.Group, Ukraine       ║'. "\n" .
+            '║       (c) 2019-2023 W.D.M.Group, Ukraine       ║'. "\n" .
             '║                                                ║'. "\n" .
             '╚════════════════════════════════════════════════╝';
         echo $name = $this->ansiFormat($welcome . "\n\n", Console::FG_GREEN);
