@@ -141,20 +141,23 @@ class m190114_193024_rbac extends Migration
             'CASCADE'
         );
 
-        // If exist module `Users` set foreign key `user_id` to `users.id`
-        if (class_exists('\wdmg\users\models\Users') && $module->moduleLoaded('users')) {
+	    if (!is_null($module)) {
 
-            $userTable = \wdmg\users\models\Users::tableName();
-            $this->addForeignKey(
-                'fk_auth_assignment_to_users_1',
-                $authManager->assignmentTable,
-                'user_id',
-                $userTable,
-                'id',
-                'CASCADE',
-                'CASCADE'
-            );
+		    // If exist module `Users` set foreign key `user_id` to `users.id`
+	        if (class_exists('\wdmg\users\models\Users') && $module->moduleLoaded('users')) {
 
+	            $userTable = \wdmg\users\models\Users::tableName();
+	            $this->addForeignKey(
+	                'fk_auth_assignment_to_users_1',
+	                $authManager->assignmentTable,
+	                'user_id',
+	                $userTable,
+	                'id',
+	                'CASCADE',
+	                'CASCADE'
+	            );
+
+	        }
         }
 
         if ($this->isMSSQL()) {

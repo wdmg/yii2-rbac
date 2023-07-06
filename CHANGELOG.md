@@ -1,7 +1,10 @@
 Changelog
 =========
 
-## 1.1.10
+## 1.2.0 (2023-07-06)
+ * Update copyrights, fix nav menu
+
+## 1.1.10 (2023-06-22)
  * RBAC child`s
  * Start of implementation of RBAC for related modules
  * ErrorHandler and custom error page
